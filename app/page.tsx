@@ -1,9 +1,9 @@
-import { SiteHeader } from '@/components/site-header'
-import { Hero } from '@/components/hero'
-import { FightCard } from '@/components/fight-card'
-import { AboutLocation } from '@/components/about-location'
-import { NewsletterCta } from '@/components/newsletter-cta'
-import { SiteFooter } from '@/components/site-footer'
+import { SiteHeader } from '@/components/site/site-header'
+import { Hero } from '@/components/site/hero'
+import { FightCard } from '@/components/site/fight-card'
+import { AboutLocation } from '@/components/site/about-location'
+import { NewsletterCta } from '@/components/site/newsletter-cta'
+import { SiteFooter } from '@/components/site/site-footer'
 
 export default function Page() {
   return (

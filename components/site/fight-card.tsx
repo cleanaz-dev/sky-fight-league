@@ -1,7 +1,7 @@
 import { Crown, Ticket } from 'lucide-react'
 import { FIGHT_CARD, EVENT, type Bout } from '@/lib/fight-data'
 import { Button } from '@/components/ui/button'
-import { Countdown } from '@/components/countdown'
+import { Countdown } from '@/components/site/countdown'
 
 export function FightCard() {
   return (

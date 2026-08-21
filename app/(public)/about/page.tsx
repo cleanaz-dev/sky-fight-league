@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { ArrowLeft, Flame, Shield, Trophy, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
+import { SiteHeader } from '@/components/site/site-header'
+import { SiteFooter } from '@/components/site/site-footer'
 
 export const metadata = {
   title: 'About Us | Sky Fight League',

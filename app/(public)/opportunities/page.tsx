@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, Swords, Users, Handshake } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { SiteFooter } from '@/components/site-footer'
+import { SiteFooter } from '@/components/site/site-footer'
 
 export const metadata = {
   title: 'Opportunities | Sky Fight League',
