@@ -38,7 +38,7 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
-      <SiteHeader />
+    
       <main className="min-h-screen bg-background pt-16">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border bg-accent py-24 sm:py-32">
@@ -49,12 +49,7 @@ export default function AboutPage() {
             THE LEAGUE
           </span>
           <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" /> Back to Home
-            </Link>
+         
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.35em] text-primary">About Us</p>
             <h1 className="display mt-3 text-6xl text-balance sm:text-8xl">
               Built in <span className="text-primary">Canada.</span>
@@ -146,7 +141,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+   
     </>
   )
 }
