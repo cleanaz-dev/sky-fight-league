@@ -1,6 +1,5 @@
-// import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Anton } from 'next/font/google'
+import { Anton, Geist } from 'next/font/google'
 import './globals.css'
 
 const geistSans = Geist({
@@ -14,23 +13,46 @@ const anton = Anton({
   variable: '--font-anton',
 })
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+  'https://skyfightleague.ca'
+
+const title = 'Sky Fight League | MMA & Muay Thai in Toronto'
+const description =
+  'Sky Fight League showcases emerging MMA and Muay Thai athletes through live events, broadcast production, and fighter storytelling in Toronto.'
+
 export const metadata: Metadata = {
-  title: 'Sky Fight League | Canada\u2019s Premier MMA Promotion',
-  description:
-    'Sky Fight League \u2014 elite Canadian mixed martial arts. Live fight cards, championship bouts, and the next generation of combat sports. Get tickets and fight updates.',
-  generator: 'v0.app',
-  keywords: ['MMA', 'Sky Fight League', 'Canada MMA', 'fight card', 'combat sports', 'championship'],
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: '%s | Sky Fight League',
+  },
+  description,
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Sky Fight League | Canada\u2019s Premier MMA Promotion',
-    description:
-      'Elite Canadian mixed martial arts. Live fight cards, championship bouts, and the next generation of combat sports.',
-    type: 'website',
+    title,
+    description,
+    url: '/',
+    siteName: 'Sky Fight League',
     locale: 'en_CA',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
   themeColor: '#111111',
 }
 
@@ -40,11 +62,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${anton.variable} bg-background`}>
-      <body className="font-sans antialiased">
-        {children}
-        {/* {process.env.NODE_ENV === 'production' && <Analytics />} */}
-      </body>
+    <html
+      lang="en-CA"
+      className={`${geistSans.variable} ${anton.variable} bg-background`}
+    >
+      <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }
