@@ -1,26 +1,56 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import {
   ArrowRight,
   BriefcaseBusiness,
   CheckCircle2,
-  Mail,
+  Loader2,
   MapPin,
-  Phone,
+  MessageSquare,
+  ShieldAlert,
   Users,
 } from "lucide-react";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import { Input } from "@/components/ui/input";
+import { submitOpportunity } from "@/lib/actions/submit-opportunity";
 
 export function OpportunitiesPage() {
-  const steps = [
-    "Meet the Sky Fight League team",
-    "Review the event plan, media plan and final cage map",
-    "Select the right partnership structure",
-    "Confirm the agreement and deliverables",
-    "Launch the campaign leading into November 28",
-  ];
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("type", "general_conversation");
+
+    startTransition(async () => {
+      const result = await submitOpportunity(formData);
+
+      if (result.success) {
+        setSuccess(true);
+      }
+    });
+  }
+
+  function handleClose() {
+    setDrawerOpen(false);
+
+    setTimeout(() => setSuccess(false), 300);
+  }
 
   return (
     <section
@@ -42,7 +72,6 @@ export function OpportunitiesPage() {
       />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-
         {/* =======================================================
             HEADER
         ======================================================= */}
@@ -58,9 +87,7 @@ export function OpportunitiesPage() {
             <h2 className="display mt-3 text-5xl leading-[0.95] sm:text-6xl lg:text-7xl">
               Build it
               <br />
-              <span className="text-primary">
-                from the beginning.
-              </span>
+              <span className="text-primary">from the beginning.</span>
             </h2>
           </Reveal>
 
@@ -79,19 +106,16 @@ export function OpportunitiesPage() {
         ======================================================= */}
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-
           {/* BRAND PARTNERS */}
 
           <Reveal x={-45} y={10} scale={0.96}>
             <div className="group relative h-full overflow-hidden border border-border bg-card transition-colors duration-500 hover:border-primary/40">
-
               <span
                 className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
                 aria-hidden="true"
               />
 
               <div className="p-8 sm:p-10">
-
                 <Reveal delay={0.1} y={15}>
                   <div className="flex h-12 w-12 items-center justify-center border border-border bg-background transition-colors duration-300 group-hover:border-primary/50">
                     <BriefcaseBusiness className="h-5 w-5 text-primary" />
@@ -108,9 +132,7 @@ export function OpportunitiesPage() {
                   <h3 className="display mt-3 text-4xl sm:text-5xl">
                     Put your
                     <br />
-                    <span className="text-primary">
-                      brand in the fight.
-                    </span>
+                    <span className="text-primary">brand in the fight.</span>
                   </h3>
                 </Reveal>
 
@@ -127,7 +149,6 @@ export function OpportunitiesPage() {
                     Brand Partnership
                   </div>
                 </Reveal>
-
               </div>
             </div>
           </Reveal>
@@ -136,14 +157,12 @@ export function OpportunitiesPage() {
 
           <Reveal x={45} y={10} scale={0.96} delay={0.08}>
             <div className="group relative h-full overflow-hidden border border-border bg-card transition-colors duration-500 hover:border-primary/40">
-
               <span
                 className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
                 aria-hidden="true"
               />
 
               <div className="p-8 sm:p-10">
-
                 <Reveal delay={0.16} y={15}>
                   <div className="flex h-12 w-12 items-center justify-center border border-border bg-background transition-colors duration-300 group-hover:border-primary/50">
                     <Users className="h-5 w-5 text-primary" />
@@ -160,9 +179,7 @@ export function OpportunitiesPage() {
                   <h3 className="display mt-3 text-4xl sm:text-5xl">
                     Tell the
                     <br />
-                    <span className="text-primary">
-                      story.
-                    </span>
+                    <span className="text-primary">story.</span>
                   </h3>
                 </Reveal>
 
@@ -179,161 +196,17 @@ export function OpportunitiesPage() {
                     Media Partnership
                   </div>
                 </Reveal>
-
               </div>
             </div>
           </Reveal>
         </div>
 
         {/* =======================================================
-            NEXT STEPS
-        ======================================================= */}
-
-        <div className="mt-16 grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
-
-          {/* INTRO */}
-
-          <div>
-            <Reveal x={-30} y={20}>
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-primary">
-                Next Steps
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.08} x={-30} y={25}>
-              <h3 className="display mt-3 text-4xl sm:text-5xl">
-                Let's make
-                <br />
-                <span className="text-primary">
-                  it official.
-                </span>
-              </h3>
-            </Reveal>
-
-            <Reveal delay={0.16} x={-20} y={20}>
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
-                From partnership structure to campaign launch, we'll work
-                together to build an activation that fits the event and your
-                objectives.
-              </p>
-            </Reveal>
-          </div>
-
-          {/* STEPS */}
-
-          <Reveal x={40} y={10} scale={0.97} delay={0.12}>
-            <div className="border border-border bg-card">
-              <div className="p-7 sm:p-9">
-
-                {steps.map((step, index) => (
-                  <Reveal
-                    key={step}
-                    delay={0.2 + index * 0.08}
-                    x={20}
-                    y={10}
-                    className="flex items-start gap-5 border-b border-border py-5 first:pt-0 last:border-b-0 last:pb-0"
-                  >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center border border-primary/40 text-xs font-bold text-primary">
-                      {String(index + 1).padStart(2, "0")}
-                    </div>
-
-                    <div className="flex items-center gap-3 pt-1">
-                      <CheckCircle2 className="hidden h-4 w-4 shrink-0 text-primary sm:block" />
-
-                      <p className="text-sm font-semibold leading-relaxed">
-                        {step}
-                      </p>
-                    </div>
-                  </Reveal>
-                ))}
-
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* =======================================================
-            CONTACTS
-        ======================================================= */}
-
-        <div className="mt-16 border-y border-border">
-          <div className="grid md:grid-cols-2">
-
-            {/* SIMON */}
-
-            <Reveal
-              x={-35}
-              y={10}
-              className="border-b border-border md:border-b-0 md:border-r"
-            >
-              <div className="p-8 sm:p-10">
-
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
-                  Co-Founder & League Lead
-                </p>
-
-                <h3 className="display mt-3 text-4xl sm:text-5xl">
-                  Simon Marcus
-                </h3>
-
-                <div className="mt-6">
-                  <a
-                    href="tel:6479240584"
-                    className="flex items-center gap-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Phone className="h-4 w-4 text-primary" />
-                    647-924-0584
-                  </a>
-                </div>
-
-              </div>
-            </Reveal>
-
-            {/* JONATHAN */}
-
-            <Reveal x={35} y={10} delay={0.08}>
-              <div className="p-8 sm:p-10">
-
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
-                  Partnerships & Creative
-                </p>
-
-                <h3 className="display mt-3 text-4xl sm:text-5xl">
-                  Jonathan Poirier
-                </h3>
-
-                <div className="mt-6 flex flex-col gap-3">
-
-                  <a
-                    href="mailto:jpoirier@sidalgroup.com"
-                    className="flex items-center gap-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Mail className="h-4 w-4 text-primary" />
-                    jpoirier@sidalgroup.com
-                  </a>
-
-                  <a
-                    href="tel:6475454295"
-                    className="flex items-center gap-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Phone className="h-4 w-4 text-primary" />
-                    647-545-4295
-                  </a>
-
-                </div>
-
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* =======================================================
-            EVENT FOOTER
+            EVENT FOOTER / CONVERSATION CTA
         ======================================================= */}
 
         <Reveal y={30} scale={0.97} delay={0.1}>
-          <div className="mt-10 flex flex-col gap-6 border border-border bg-card p-7 sm:p-9 md:flex-row md:items-center md:justify-between">
-
+          <div className="mt-14 flex flex-col gap-6 border border-border bg-card p-7 sm:p-9 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
 
@@ -349,14 +222,12 @@ export function OpportunitiesPage() {
             </div>
 
             <Button
-              render={
-                <a href="mailto:jpoirier@sidalgroup.com" />
-              }
-              nativeButton={false}
+              nativeButton={true}
+              onClick={() => setDrawerOpen(true)}
               className="rounded-none font-bold uppercase tracking-widest"
             >
               Start a Conversation
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </Reveal>
@@ -373,8 +244,165 @@ export function OpportunitiesPage() {
             agreed upon separately in writing.
           </p>
         </Reveal>
-
       </div>
+
+      {/* =========================================================
+          START A CONVERSATION DRAWER
+      ========================================================= */}
+
+      <Drawer
+        open={drawerOpen}
+        onOpenChange={(open) => !open && handleClose()}
+      >
+        <DrawerContent className="border-t border-primary/20 bg-background">
+          <div className="mx-auto flex h-[85vh] w-full max-w-lg flex-col overflow-y-auto px-4 py-6 sm:h-[80vh] sm:px-6">
+            <DrawerHeader className="px-0 text-left sm:text-center">
+              <div className="mb-4 flex justify-start sm:justify-center">
+                <motion.span
+                  className="hazard-stripes h-1.5 w-16"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.6 }}
+                />
+              </div>
+
+              <DrawerTitle className="display text-3xl uppercase tracking-tighter sm:text-5xl">
+                START A <span className="text-primary">CONVERSATION</span>
+              </DrawerTitle>
+
+              <DrawerDescription className="mt-2 text-xs uppercase tracking-widest text-muted-foreground">
+                Tell us how you&apos;re looking to collaborate with Sky Fight
+                League.
+              </DrawerDescription>
+            </DrawerHeader>
+
+            <div className="mt-6 flex-1">
+              {success ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex h-full flex-col items-center justify-center border border-primary/20 bg-primary/5 py-10 text-center"
+                >
+                  <CheckCircle2 className="mb-4 h-12 w-12 text-primary" />
+
+                  <h3 className="display text-2xl uppercase">
+                    Message Received
+                  </h3>
+
+                  <p className="mt-2 px-6 text-xs uppercase tracking-widest text-muted-foreground">
+                    Thank you. A member of our executive team will be in touch
+                    shortly.
+                  </p>
+
+                  <DrawerClose
+                    render={
+                      <Button
+                        className="mt-8 rounded-none px-8"
+                        variant="outline"
+                      />
+                    }
+                  >
+                    Close
+                  </DrawerClose>
+                </motion.div>
+              ) : (
+                <form
+                  onSubmit={onSubmit}
+                  className="flex flex-col gap-4 pb-10"
+                >
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="conv-name"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground"
+                    >
+                      Full Name
+                    </label>
+
+                    <Input
+                      id="conv-name"
+                      name="name"
+                      required
+                      className="h-12 rounded-none border-border/50 bg-accent/30"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="conv-entity"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground"
+                    >
+                      Company / Organization
+                    </label>
+
+                    <Input
+                      id="conv-entity"
+                      name="entity"
+                      required
+                      className="h-12 rounded-none border-border/50 bg-accent/30"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="conv-email"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground"
+                    >
+                      Professional Email
+                    </label>
+
+                    <Input
+                      id="conv-email"
+                      name="email"
+                      type="email"
+                      required
+                      className="h-12 rounded-none border-border/50 bg-accent/30"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="conv-message"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground"
+                    >
+                      How can we work together?
+                    </label>
+
+                    <textarea
+                      id="conv-message"
+                      name="message"
+                      rows={3}
+                      className="flex w-full rounded-none border border-border/50 bg-accent/30 px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isPending}
+                    className="mt-4 h-14 w-full rounded-none text-sm font-black uppercase tracking-widest"
+                  >
+                    {isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <MessageSquare className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+
+                  <p className="mt-2 flex items-center justify-center gap-2 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <ShieldAlert className="h-3 w-3" />
+                    Secure Transmission
+                  </p>
+                </form>
+              )}
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </section>
   );
 }
