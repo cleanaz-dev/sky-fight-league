@@ -24,12 +24,7 @@ export function SiteFooter() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="/opportunities"
-              className="text-xs font-semibold uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Opportunities
-            </a>
+           
           </nav>
         </div>
 
