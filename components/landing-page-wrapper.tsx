@@ -7,11 +7,11 @@ import { EarlyAccessDrawer } from "./site/early-access-drawer";
 import { FightCard } from "./site/fight-card";
 import { Hero } from "./site/hero";
 import { NewsletterCta } from "./site/newsletter-cta";
-import { OpportunitiesPage } from "./site/pages/opportunities-page";
 import { SectionBreakBanner } from "./site/section-break-banner";
 import { SimonMarcus } from "./site/simon-marcus";
 import { SiteFooter } from "./site/site-footer";
 import { SiteHeader } from "./site/site-header";
+import { Opportunities } from "./site/oppurtunities";
 
 export function LandingPageWrapper() {
   const isLocked = true;
@@ -29,7 +29,7 @@ export function LandingPageWrapper() {
         <FightCard onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
         <SimonMarcus />
         <AboutLocation />
-        <OpportunitiesPage />
+        <Opportunities />
         <NewsletterCta />
       </main>
       <SiteFooter />

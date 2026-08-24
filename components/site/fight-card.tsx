@@ -42,7 +42,10 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
             </p>
 
             <h2 className="display mt-3 text-5xl sm:text-7xl">
-              Fight <span className="text-stroke-primary text-transparent">Card</span>
+              Fight{" "}
+              <span className="text-stroke-primary text-transparent">
+                Card
+              </span>
             </h2>
 
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -53,6 +56,7 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
           </div>
 
           <div className="flex flex-col gap-4 lg:items-end">
+            {/* Countdown */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -66,13 +70,18 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
               <Countdown scheduledAt={EVENT.scheduledAt} />
             </motion.div>
 
+            {/* =====================================================
+                EARLY ACCESS / TICKETS BUTTON
+            ===================================================== */}
+
             {isLocked ? (
               <Button
                 nativeButton={true}
+                type="button"
                 onClick={onOpenEarlyAccess}
                 className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
               >
-                <Bell className="h-4 w-4 mr-2" />
+                <Bell className="mr-2 h-4 w-4" />
                 Get First Access
               </Button>
             ) : (
@@ -81,7 +90,7 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
                 nativeButton={false}
                 className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
               >
-                <Ticket className="h-4 w-4 mr-2" />
+                <Ticket className="mr-2 h-4 w-4" />
                 Buy Tickets
               </Button>
             )}
@@ -115,7 +124,11 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
             className="mt-12 flex flex-col gap-3"
           >
             {FIGHT_CARD.map((bout, i) => (
-              <BoutRow key={bout.weightClass} bout={bout} index={i} />
+              <BoutRow
+                key={bout.weightClass}
+                bout={bout}
+                index={i}
+              />
             ))}
           </motion.ul>
         )}
@@ -125,7 +138,7 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
 }
 
 /* ===============================================================
-   LOCKED CARD NOTICE (Slim Component)
+   LOCKED CARD NOTICE
 ================================================================ */
 
 function LockedCardNotice() {
@@ -140,6 +153,7 @@ function LockedCardNotice() {
       }}
       className="group relative flex flex-col items-center justify-center overflow-hidden border border-border bg-card py-16 sm:py-24"
     >
+      {/* Hazard stripe */}
       <motion.span
         className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
         aria-hidden="true"
@@ -151,13 +165,18 @@ function LockedCardNotice() {
           delay: 0.15,
           ease: [0.22, 1, 0.36, 1],
         }}
-        style={{ transformOrigin: "center" }}
+        style={{
+          transformOrigin: "center",
+        }}
       />
 
       <Lock className="mb-6 h-8 w-8 text-muted-foreground/50 sm:h-10 sm:w-10" />
 
       <h3 className="display text-center text-3xl sm:text-5xl">
-        LINEUP <span className="text-stroke-primary text-transparent">CLASSIFIED</span>
+        LINEUP{" "}
+        <span className="text-stroke-primary text-transparent">
+          CLASSIFIED
+        </span>
       </h3>
 
       <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-primary sm:text-xs">
@@ -166,11 +185,14 @@ function LockedCardNotice() {
 
       {/* Atmospheric watermark */}
       <motion.span
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 display text-[10vw] sm:text-[8vw] text-foreground/[0.02]"
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 display text-[10vw] text-foreground/[0.02] sm:text-[8vw]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+        }}
       >
         LOCKED
       </motion.span>
@@ -182,7 +204,13 @@ function LockedCardNotice() {
    BOUT ROW
 ================================================================ */
 
-function BoutRow({ bout, index }: { bout: Bout; index: number }) {
+function BoutRow({
+  bout,
+  index,
+}: {
+  bout: Bout;
+  index: number;
+}) {
   const title = bout.isTitle;
 
   return (
@@ -202,9 +230,12 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
         ease: [0.22, 1, 0.36, 1],
       }}
       className={`group relative overflow-hidden border ${
-        title ? "border-primary bg-primary/5" : "border-border bg-card"
+        title
+          ? "border-primary bg-primary/5"
+          : "border-border bg-card"
       }`}
     >
+      {/* Title fight hazard stripe */}
       {title && (
         <motion.span
           className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
@@ -223,9 +254,13 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
         />
       )}
 
+      {/* Weight class / rounds */}
       <div className="flex items-center justify-center gap-1.5 border-b border-border/60 py-2">
         {title && (
-          <Crown className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+          <Crown
+            className="h-3.5 w-3.5 text-primary"
+            aria-hidden="true"
+          />
         )}
 
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
@@ -233,12 +268,22 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
         </span>
       </div>
 
+      {/* Fighters */}
       <div className="flex items-center gap-2 px-3 py-4 sm:gap-6 sm:px-8 sm:py-6">
+        {/* Red corner */}
         <motion.div
           className="min-w-0 flex-1 text-right"
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          initial={{
+            opacity: 0,
+            x: -10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.5,
             delay: 0.12,
@@ -250,7 +295,9 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
           </p>
 
           <p className="mt-1.5 truncate text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:text-xs">
-            <span className="text-primary">{bout.red.record}</span>
+            <span className="text-primary">
+              {bout.red.record}
+            </span>
 
             <span className="hidden sm:inline">
               {" "}
@@ -259,6 +306,7 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
           </p>
         </motion.div>
 
+        {/* VS */}
         <motion.div
           className="flex shrink-0 flex-col items-center"
           initial={{
@@ -271,7 +319,9 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
             scale: 1,
             rotate: 0,
           }}
-          viewport={{ once: true }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.5,
             delay: 0.18,
@@ -283,11 +333,20 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
           </span>
         </motion.div>
 
+        {/* White corner */}
         <motion.div
           className="min-w-0 flex-1 text-left"
-          initial={{ opacity: 0, x: 10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          initial={{
+            opacity: 0,
+            x: 10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
           transition={{
             duration: 0.5,
             delay: 0.12,
@@ -303,11 +362,14 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
               &ldquo;{bout.white.nickname}&rdquo; &middot;{" "}
             </span>
 
-            <span className="text-primary">{bout.white.record}</span>
+            <span className="text-primary">
+              {bout.white.record}
+            </span>
           </p>
         </motion.div>
       </div>
 
+      {/* Bout number */}
       <motion.span
         className="pointer-events-none absolute bottom-1 right-2 display text-3xl text-foreground/[0.04] sm:text-6xl"
         initial={{
@@ -316,7 +378,9 @@ function BoutRow({ bout, index }: { bout: Bout; index: number }) {
         whileInView={{
           opacity: 1,
         }}
-        viewport={{ once: true }}
+        viewport={{
+          once: true,
+        }}
         transition={{
           duration: 0.8,
           delay: 0.2,
