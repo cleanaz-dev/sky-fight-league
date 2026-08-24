@@ -23,16 +23,30 @@ export function LandingPageWrapper() {
         isLocked={isLocked}
         onOpenEarlyAccess={() => setEarlyAccessOpen(true)}
       />
+      
       <main>
-        <Hero />
+        {/* Pass down isLocked and the drawer trigger to Hero */}
+        <Hero 
+          isLocked={isLocked}
+          onOpenEarlyAccess={() => setEarlyAccessOpen(true)}
+        />
+        
         <SectionBreakBanner />
-        <FightCard onOpenEarlyAccess={() => setEarlyAccessOpen(true)} />
+        
+        {/* Make sure FightCard accepts these props if you updated it too! */}
+        <FightCard 
+          onOpenEarlyAccess={() => setEarlyAccessOpen(true)} 
+        />
+        
         <SimonMarcus />
         <AboutLocation />
         <Opportunities />
-        <NewsletterCta />
+        
+        <NewsletterCta isLocked={isLocked} />
       </main>
+
       <SiteFooter />
+
       <EarlyAccessDrawer
         open={earlyAccessOpen}
         onOpenChange={setEarlyAccessOpen}

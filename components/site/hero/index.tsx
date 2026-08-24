@@ -11,10 +11,12 @@ import { CenterVs } from "./center-vs";
 import { EventInfo } from "./event-info";
 import { Button } from "@/components/ui/button";
 
-export function Hero() {
-  // TODO: Replace this with your dynamic Event model status later
-  const isLocked = true; 
+interface HeroProps {
+  isLocked?: boolean;
+  onOpenEarlyAccess?: () => void;
+}
 
+export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
   return (
     <section id="top" className="relative min-h-screen overflow-hidden bg-accent pt-16">
       
@@ -127,6 +129,8 @@ export function Hero() {
             <HeroReveal y={20} delay={0.55}>
               <div className="mt-10 sm:mt-12">
                 <Button
+                  nativeButton={true}
+                  onClick={onOpenEarlyAccess}
                   size="lg"
                   className="rounded-none bg-white px-8 py-6 text-sm font-black uppercase tracking-widest text-red-600 transition-all hover:bg-gray-200 hover:text-red-700 sm:px-10 sm:py-7 sm:text-base"
                 >
