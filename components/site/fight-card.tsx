@@ -1,6 +1,6 @@
 "use client";
 
-import { Crown, Ticket } from "lucide-react";
+import { Crown, Ticket, Lock, Bell } from "lucide-react";
 import { motion } from "motion/react";
 
 import { FIGHT_CARD, EVENT, type Bout } from "@/lib/fight-data";
@@ -8,14 +8,20 @@ import { FIGHT_CARD, EVENT, type Bout } from "@/lib/fight-data";
 import { Button } from "@/components/ui/button";
 import { Countdown } from "@/components/site/countdown";
 
-export function FightCard() {
+interface FightCardProps {
+  onOpenEarlyAccess: () => void;
+}
+
+export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
+  // TODO: Replace this with your dynamic Event model status later
+  const isLocked = true;
+
   return (
     <section
       id="fight-card"
       className="relative border-t border-border bg-background py-20 sm:py-28"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-
         {/* =========================================================
             HEADER
         ========================================================= */}
@@ -36,12 +42,13 @@ export function FightCard() {
             </p>
 
             <h2 className="display mt-3 text-5xl sm:text-7xl">
-              Fight <span className="text-stroke-primary">Card</span>
+              Fight <span className="text-stroke-primary text-transparent">Card</span>
             </h2>
 
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Five bouts. One night. Every athlete steps into the Sky cage
-              with everything on the line.
+              {isLocked
+                ? "The official fight card is currently classified. Sign up for first access to the card reveal and ticket announcements."
+                : "Five bouts. One night. Every athlete steps into the Sky cage with everything on the line."}
             </p>
           </div>
 
@@ -59,48 +66,115 @@ export function FightCard() {
               <Countdown scheduledAt={EVENT.scheduledAt} />
             </motion.div>
 
-            <Button
-              render={<a href="#newsletter" />}
-              nativeButton={false}
-              className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
-            >
-              <Ticket className="h-4 w-4" />
-              Buy Tickets
-            </Button>
+            {isLocked ? (
+              <Button
+                nativeButton={true}
+                onClick={onOpenEarlyAccess}
+                className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
+              >
+                <Bell className="h-4 w-4 mr-2" />
+                Get First Access
+              </Button>
+            ) : (
+              <Button
+                render={<a href="#fight-card" />}
+                nativeButton={false}
+                className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
+              >
+                <Ticket className="h-4 w-4 mr-2" />
+                Buy Tickets
+              </Button>
+            )}
           </div>
         </motion.div>
 
         {/* =========================================================
-            FIGHT LIST
+            FIGHT LIST / LOCKED STATE
         ========================================================= */}
 
-        <motion.ul
-          initial="hidden"
-          whileInView="visible"
-          viewport={{
-            once: true,
-            margin: "-80px",
-          }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.12,
+        {isLocked ? (
+          <div className="mt-12">
+            <LockedCardNotice />
+          </div>
+        ) : (
+          <motion.ul
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              margin: "-80px",
+            }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.12,
+                },
               },
-            },
-          }}
-          className="mt-12 flex flex-col gap-3"
-        >
-          {FIGHT_CARD.map((bout, i) => (
-            <BoutRow
-              key={bout.weightClass}
-              bout={bout}
-              index={i}
-            />
-          ))}
-        </motion.ul>
+            }}
+            className="mt-12 flex flex-col gap-3"
+          >
+            {FIGHT_CARD.map((bout, i) => (
+              <BoutRow key={bout.weightClass} bout={bout} index={i} />
+            ))}
+          </motion.ul>
+        )}
       </div>
     </section>
+  );
+}
+
+/* ===============================================================
+   LOCKED CARD NOTICE (Slim Component)
+================================================================ */
+
+function LockedCardNotice() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="group relative flex flex-col items-center justify-center overflow-hidden border border-border bg-card py-16 sm:py-24"
+    >
+      <motion.span
+        className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
+        aria-hidden="true"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.7,
+          delay: 0.15,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        style={{ transformOrigin: "center" }}
+      />
+
+      <Lock className="mb-6 h-8 w-8 text-muted-foreground/50 sm:h-10 sm:w-10" />
+
+      <h3 className="display text-center text-3xl sm:text-5xl">
+        LINEUP <span className="text-stroke-primary text-transparent">CLASSIFIED</span>
+      </h3>
+
+      <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-primary sm:text-xs">
+        Full fight card revealing 09.17.26
+      </p>
+
+      {/* Atmospheric watermark */}
+      <motion.span
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 display text-[10vw] sm:text-[8vw] text-foreground/[0.02]"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        LOCKED
+      </motion.span>
+    </motion.div>
   );
 }
 
@@ -108,13 +182,7 @@ export function FightCard() {
    BOUT ROW
 ================================================================ */
 
-function BoutRow({
-  bout,
-  index,
-}: {
-  bout: Bout;
-  index: number;
-}) {
+function BoutRow({ bout, index }: { bout: Bout; index: number }) {
   const title = bout.isTitle;
 
   return (
@@ -134,13 +202,9 @@ function BoutRow({
         ease: [0.22, 1, 0.36, 1],
       }}
       className={`group relative overflow-hidden border ${
-        title
-          ? "border-primary bg-primary/5"
-          : "border-border bg-card"
+        title ? "border-primary bg-primary/5" : "border-border bg-card"
       }`}
     >
-      {/* Title fight stripe */}
-
       {title && (
         <motion.span
           className="hazard-stripes absolute inset-x-0 top-0 h-1.5"
@@ -159,16 +223,9 @@ function BoutRow({
         />
       )}
 
-      {/* =========================================================
-          WEIGHT CLASS
-      ========================================================= */}
-
       <div className="flex items-center justify-center gap-1.5 border-b border-border/60 py-2">
         {title && (
-          <Crown
-            className="h-3.5 w-3.5 text-primary"
-            aria-hidden="true"
-          />
+          <Crown className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
         )}
 
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
@@ -176,14 +233,7 @@ function BoutRow({
         </span>
       </div>
 
-      {/* =========================================================
-          FIGHTERS
-      ========================================================= */}
-
       <div className="flex items-center gap-2 px-3 py-4 sm:gap-6 sm:px-8 sm:py-6">
-
-        {/* Red fighter */}
-
         <motion.div
           className="min-w-0 flex-1 text-right"
           initial={{ opacity: 0, x: -10 }}
@@ -200,9 +250,7 @@ function BoutRow({
           </p>
 
           <p className="mt-1.5 truncate text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:text-xs">
-            <span className="text-primary">
-              {bout.red.record}
-            </span>
+            <span className="text-primary">{bout.red.record}</span>
 
             <span className="hidden sm:inline">
               {" "}
@@ -210,10 +258,6 @@ function BoutRow({
             </span>
           </p>
         </motion.div>
-
-        {/* =====================================================
-            VS
-        ===================================================== */}
 
         <motion.div
           className="flex shrink-0 flex-col items-center"
@@ -239,8 +283,6 @@ function BoutRow({
           </span>
         </motion.div>
 
-        {/* White fighter */}
-
         <motion.div
           className="min-w-0 flex-1 text-left"
           initial={{ opacity: 0, x: 10 }}
@@ -261,16 +303,10 @@ function BoutRow({
               &ldquo;{bout.white.nickname}&rdquo; &middot;{" "}
             </span>
 
-            <span className="text-primary">
-              {bout.white.record}
-            </span>
+            <span className="text-primary">{bout.white.record}</span>
           </p>
         </motion.div>
       </div>
-
-      {/* =========================================================
-          BOUT NUMBER
-      ========================================================= */}
 
       <motion.span
         className="pointer-events-none absolute bottom-1 right-2 display text-3xl text-foreground/[0.04] sm:text-6xl"

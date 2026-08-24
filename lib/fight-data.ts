@@ -15,9 +15,9 @@ export type Bout = {
 }
 
 export const EVENT = {
-  number: 'SFL 12',
-  title: 'Reign of Fire',
-  date: 'Saturday, October 18, 2026',
+  number: 'SFL 001',
+  title: 'The Inaugural Event',
+  date: 'Saturday, November 28, 2026',
   // First bout 6:30 PM Eastern. Drives the countdown timer.
   scheduledAt: '2026-10-18T18:30:00-04:00',
   doors: 'Doors 5:00 PM \u2014 First Bout 6:30 PM',
