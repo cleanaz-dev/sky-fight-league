@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Note: changed from motion/react to standard framer-motion based on typical ecosystem
 import { Calendar, MapPin, Bell } from "lucide-react";
 
 import { EVENT, MAIN_EVENT } from "@/lib/fight-data";
@@ -23,15 +23,23 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
       {/* =========================================================
           ATMOSPHERIC BACKGROUND
       ========================================================= */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
+        {/* Mobile Background */}
         <Image
-          src="/arena-smoke.png"
+          src="/cage-hero-mobile.png"
           alt=""
           fill
           priority
-          className={`object-cover ${isLocked ? "opacity-60 mix-blend-luminosity" : "opacity-40"}`}
+          className="object-cover sm:hidden"
         />
-        <div className={`absolute inset-0 bg-gradient-to-b ${isLocked ? "from-background/90 via-accent/60" : "from-accent/60 via-accent/20"} to-background`} />
+        {/* Desktop Background */}
+        <Image
+          src="/cage-hero-desktop.png"
+          alt=""
+          fill
+          priority
+          className="hidden object-cover sm:block"
+        />
       </div>
 
       {/* =========================================================
@@ -97,7 +105,12 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
             <HeroReveal y={20} delay={0.25}>
               <h1 className="display flex flex-col items-center text-center text-5xl leading-[0.85] tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
                 <span className="text-white">THE CARD</span>
-                {/* Black text with white stroke */}
+                {/* 
+                    Note: If you run into the same overlapping internal lines issue with the hollow text here, 
+                    change text-transparent and [-webkit-text-stroke] to:
+                    text-black [text-shadow:-1px_-1px_0_white,1px_-1px_0_white,-1px_1px_0_white,1px_1px_0_white]
+                    sm:[text-shadow:-2px_-2px_0_white,2px_-2px_0_white,-2px_2px_0_white,2px_2px_0_white] 
+                */}
                 <span className="mt-2 text-black [-webkit-text-stroke:1px_white] sm:mt-3 sm:[-webkit-text-stroke:2px_white]">
                   UNLOCKS SOON
                 </span>

@@ -1,11 +1,41 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { ArrowRight, Check, Swords, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { submitEarlyAccess } from "@/lib/actions/submit-early-access";
+
+/**
+ * Renders the logo with a black and white offset phasing effect behind it.
+ */
+function PhasingLogo({ className = "" }: { className?: string }) {
+  return (
+    <div className="relative inline-flex items-center justify-center">
+      {/* Contrast Layer (White Offset) */}
+      <img
+        src="/banner-logo.png"
+        alt=""
+        className={`absolute -left-[4px] -top-[4px] z-0 brightness-0 invert filter sm:-left-[8px] sm:-top-[8px] ${className}`}
+        aria-hidden="true"
+      />
+      {/* Contrast Layer (Black Offset) */}
+      <img
+        src="/banner-logo.png"
+        alt=""
+        className={`absolute left-[4px] top-[4px] z-0 opacity-80 brightness-0 filter sm:left-[8px] sm:top-[8px] ${className}`}
+        aria-hidden="true"
+      />
+      {/* Main Logo */}
+      <img
+        src="/banner-logo.png"
+        alt="Sky Fight League Logo"
+        className={`relative z-10 ${className}`}
+      />
+    </div>
+  );
+}
 
 export function NewsletterCta({ isLocked = true }: { isLocked?: boolean }) {
   const [isPending, startTransition] = useTransition();
@@ -29,45 +59,29 @@ export function NewsletterCta({ isLocked = true }: { isLocked?: boolean }) {
       className="relative overflow-hidden border-t border-border bg-primary py-20 text-primary-foreground sm:py-28"
     >
       {/* =========================================================
-          MOBILE AMBIENT BACKGROUND
+          AMBIENT BACKGROUND LOGO
       ========================================================= */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 -right-8 flex flex-col justify-center sm:hidden"
-        initial={{ x: 70, scale: 0.8, opacity: 1 }}
-        whileInView={{ x: -90, scale: 2.4, opacity: 1 }}
-        viewport={{ once: true, amount: 0.05 }}
-        transition={{ duration: 18, ease: "linear" }}
-      >
-        <span className="display whitespace-nowrap text-[18vw] leading-[0.75] text-primary-foreground/10">
-          SKY
-        </span>
-        <span className="display whitespace-nowrap text-[18vw] leading-[0.75] text-primary-foreground/10">
-          FIGHT
-        </span>
-        <span className="display whitespace-nowrap text-[18vw] leading-[0.75] text-primary-foreground/10">
-          LEAGUE
-        </span>
-      </motion.div>
-
-      {/* =========================================================
-          DESKTOP AMBIENT BACKGROUND
-      ========================================================= */}
-      <motion.span
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[65%] top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-[24vw] leading-none text-primary-foreground/10 display sm:block"
-        initial={{ x: 0, scale: 1 }}
-        whileInView={{ x: "-45vw", scale: 1.45 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 22, ease: "linear" }}
-      >
-        SFL
-      </motion.span>
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden opacity-10 sm:opacity-15">
+        <motion.div
+          animate={{
+            x: ["-2%", "2%", "-2%"],
+            y: ["-1%", "1%", "-1%"],
+          }}
+          transition={{
+            duration: 12,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
+        >
+          {/* Sized extremely large so it bleeds off the edges */}
+          <PhasingLogo className="w-[200vw] max-w-none object-contain sm:w-[130vw] lg:w-[100vw]" />
+        </motion.div>
+      </div>
 
       {/* =========================================================
           CONTENT
       ========================================================= */}
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
         
         {/* =======================================================
             NEWSLETTER / EARLY ACCESS FORM
@@ -159,7 +173,7 @@ export function NewsletterCta({ isLocked = true }: { isLocked?: boolean }) {
         {/* =======================================================
             OPPORTUNITY CTA
         ======================================================= */}
-        <div className="border border-primary-foreground/30 bg-accent p-8 text-foreground sm:p-10">
+        <div className="border border-primary-foreground/30 bg-accent p-8 text-foreground shadow-2xl sm:p-10">
           <Swords className="h-8 w-8 text-primary" />
 
           <h3 className="mt-4 text-3xl display sm:text-4xl">
