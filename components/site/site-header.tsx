@@ -19,12 +19,17 @@ export function SiteHeader({ isLocked, onOpenEarlyAccess }: SiteHeaderProps) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2" aria-label="Sky Fight League home">
-          <span className="display flex h-8 w-8 items-center justify-center bg-primary text-xl text-primary-foreground">
+        <img
+        src="/header-logo.png"
+        alt="sfl-logo"
+      className="h-auto w-32"
+        />
+          {/* <span className="display flex h-8 w-8 items-center justify-center bg-primary text-xl text-primary-foreground">
             S
           </span>
           <span className="display text-lg tracking-wide">
             Sky Fight <span className="text-primary">League</span>
-          </span>
+          </span> */}
         </a>
 
         {/* Desktop Navigation */}

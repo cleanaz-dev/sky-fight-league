@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ArrowRight, BriefcaseBusiness, Camera, Tv, CheckCircle2, ShieldAlert, Loader2 } from "lucide-react";
-import { motion } from "motion/react";
+import { ArrowRight, CheckCircle2, ShieldAlert, Loader2 } from "lucide-react";
+import { motion } from "framer-motion"; // Changed to framer-motion based on standard ecosystem, adjust to motion/react if strictly required
 
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,6 @@ export function Opportunities() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    // Append the type so the server knows what form this is
     formData.append("type", activeDrawer as string);
 
     startTransition(async () => {
@@ -43,296 +42,323 @@ export function Opportunities() {
 
   function closeDrawer() {
     setActiveDrawer(null);
-    // Reset success state after a brief delay so the animation is smooth
     setTimeout(() => setSuccess(false), 300);
   }
+
+  // CSS for the diagonal stripe patterns
+  const redStripes = {
+    backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px)`,
+  };
+
+  const whiteStripes = {
+    backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px)`,
+  };
 
   return (
     <section
       id="opportunities"
-      className="relative overflow-hidden border-t border-border bg-accent py-20 sm:py-28"
+      className="relative overflow-hidden bg-[#f3f2ef] py-24 sm:py-32 font-sans"
     >
-      {/* =========================================================
-          BACKGROUND DECORATION
-      ========================================================= */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-12rem] top-32 h-[30rem] w-[30rem] rounded-full border-[50px] border-primary/[0.035]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-40 left-[-10rem] h-80 w-80 rotate-45 border-[30px] border-primary/[0.025]"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-
+      <div className="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16">
         {/* =======================================================
             HEADER
         ======================================================= */}
-        <div className="max-w-4xl">
-          <Reveal y={20}>
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-primary">
-              The Opportunity
-            </p>
-          </Reveal>
+        <Reveal y={20}>
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8">
+            <div className="text-[11px] font-bold tracking-[0.2em] whitespace-nowrap pt-2">
+     
+              <span className="text-gray-500 uppercase">Partners & Press</span>
+            </div>
 
-          <Reveal delay={0.08} y={30}>
-            <h2 className="display mt-3 text-5xl leading-[0.95] sm:text-6xl lg:text-7xl">
-              Get closer
-              <br />
-              <span className="text-primary">to the action.</span>
+            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black uppercase tracking-tighter leading-[0.85] text-left lg:text-right">
+              <span className="text-black block">Get Closer</span>
+              <span
+                className="text-transparent block mt-1"
+                style={{ WebkitTextStroke: "2px #111" }}
+              >
+                To The Action.
+              </span>
             </h2>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
 
         {/* =======================================================
             PARTNERSHIP OPPORTUNITIES GRID
         ======================================================= */}
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <Reveal y={30} delay={0.1}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 w-full shadow-2xl">
+   
+            <div
+              className="relative bg-[#bd1026] text-white p-10 sm:p-14 lg:p-20 overflow-hidden flex flex-col justify-between min-h-[450px]"
+              style={redStripes}
+            >
+          
 
-          {/* 01: BRAND PARTNERS */}
-          <Reveal x={-45} y={10} scale={0.96}>
-            <div className="group relative flex h-full flex-col overflow-hidden border border-primary/50 bg-primary/5 transition-colors duration-500 hover:bg-primary/10">
-              <span className="hazard-stripes absolute inset-x-0 top-0 h-1.5" aria-hidden="true" />
-
-              <div className="flex flex-1 flex-col p-8 sm:p-10">
-                <Reveal delay={0.1} y={15}>
-                  <div className="flex h-12 w-12 items-center justify-center bg-primary text-primary-foreground">
-                    <BriefcaseBusiness className="h-6 w-6" />
-                  </div>
-                </Reveal>
-
-                <Reveal delay={0.18} y={20}>
-                  <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                    01 <span className="mx-2 opacity-50">/</span> For Brands
-                  </p>
-                </Reveal>
-
-                <Reveal delay={0.26} y={25}>
-                  <h3 className="display mt-3 text-4xl sm:text-5xl">
-                    Sponsorship <br /> Opportunities
-                  </h3>
-                </Reveal>
-
-                <Reveal delay={0.34} y={20}>
-                  <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    Build a partnership around live event visibility, fighter content and meaningful access to the SFL audience.
-                  </p>
-                </Reveal>
-
-                <div className="mt-auto pt-10">
-                  <Reveal delay={0.42} y={15}>
-                    <Button
-                      onClick={() => setActiveDrawer("sponsor")}
-                      className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
-                    >
-                      Request Deck <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Reveal>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* 02: MEDIA PARTNERS */}
-          <Reveal x={45} y={10} scale={0.96} delay={0.08}>
-            <div className="group relative flex h-full flex-col overflow-hidden border border-border bg-card transition-colors duration-500 hover:border-foreground/30">
-              <span className="absolute inset-x-0 top-0 h-1.5 bg-border group-hover:bg-foreground/30 transition-colors" aria-hidden="true" />
-
-              <div className="flex flex-1 flex-col p-8 sm:p-10">
-                <Reveal delay={0.16} y={15}>
-                  <div className="flex h-12 w-12 items-center justify-center border border-border bg-background">
-                    <Camera className="h-5 w-5 text-foreground" />
-                  </div>
-                </Reveal>
-
-                <Reveal delay={0.24} y={20}>
-                  <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
-                    02 <span className="mx-2 opacity-30">/</span> For Media
-                  </p>
-                </Reveal>
-
-                <Reveal delay={0.32} y={25}>
-                  <h3 className="display mt-3 text-4xl sm:text-5xl">
-                    Press & <br /> Media
-                  </h3>
-                </Reveal>
-
-                <Reveal delay={0.4} y={20}>
-                  <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    Journalists, photographers, broadcasters and media outlets can request SFL information, assets and event access.
-                  </p>
-                </Reveal>
-
-                <div className="mt-auto pt-10">
-                  <Reveal delay={0.48} y={15}>
-                    <Button
-                      variant="outline"
-                      onClick={() => setActiveDrawer("media")}
-                      className="w-full rounded-none font-bold uppercase tracking-widest bg-transparent sm:w-auto hover:bg-foreground hover:text-background"
-                    >
-                      Media Inquiry <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Reveal>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* =======================================================
-            BROADCAST PARTNER
-        ======================================================= */}
-        <Reveal y={30} scale={0.97} delay={0.2}>
-          <div className="mt-16 overflow-hidden border border-border bg-background relative">
-            {/* Dark gradient overlay for a premium TV feel */}
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-0" />
-
-            <div className="relative z-10 flex flex-col p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-              <div className="max-w-xl">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                  <Tv className="h-4 w-4" />
-                  Broadcast Partner
-                </div>
-
-                <h3 className="display mt-4 text-4xl sm:text-5xl">
-                  BUILT TO BE WATCHED.
+              <div className="relative z-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+                  For Brands
+                </p>
+                <h3 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-6">
+                  Sponsorship <br /> Opportunities
                 </h3>
-
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  Professional live fight broadcast production. SFL pairs an intimate Toronto event with a broadcast platform built for combat-sports audiences.
+                <p className="text-sm opacity-90 max-w-sm leading-relaxed">
+                  Build a partnership around live event visibility, fighter
+                  content and meaningful access to the SFL audience.
                 </p>
               </div>
 
-              <div className="mt-8 lg:mt-0 flex shrink-0 items-center border-l-0 lg:border-l border-border/50 lg:pl-12">
-                <div className="flex flex-col items-start lg:items-center">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                    Available On
-                  </span>
-                  {/* Text placeholder for Fight Network - you can swap this for a <Image /> of their logo if you have it */}
-                  <h4 className="display text-3xl text-foreground">
-                    FIGHT <span className="text-primary">NETWORK</span>
-                  </h4>
-                </div>
+              <div className="mt-16 relative z-10">
+                <button
+                  onClick={() => setActiveDrawer("sponsor")}
+                  className="group flex items-center text-xs font-bold uppercase tracking-[0.15em] hover:opacity-80 transition-opacity"
+                >
+                  Request Sponsorship Deck
+                  <ArrowRight className="ml-3 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+            </div>
+
+            {/*MEDIA PARTNERS (WHITE CARD) */}
+            <div
+              className="relative bg-white text-black p-10 sm:p-14 lg:p-20 overflow-hidden flex flex-col justify-between min-h-[450px]"
+              style={whiteStripes}
+            >
+         
+
+              <div className="relative z-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-6 text-gray-500">
+                  For Media
+                </p>
+                <h3 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase leading-[0.9] tracking-tighter mb-6">
+                  Press & <br /> Media
+                </h3>
+                <p className="text-sm text-gray-600 max-w-sm leading-relaxed">
+                  Journalists, photographers, broadcasters and media outlets can
+                  request SFL information, assets and event access.
+                </p>
+              </div>
+
+              <div className="mt-16 relative z-10">
+                <button
+                  onClick={() => setActiveDrawer("media")}
+                  className="group flex items-center text-xs font-bold uppercase tracking-[0.15em] hover:opacity-70 transition-opacity"
+                >
+                  Media Inquiry
+                  <ArrowRight className="ml-3 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
               </div>
             </div>
           </div>
         </Reveal>
 
+        {/* =======================================================
+            BROADCAST PARTNER
+        ======================================================= */}
+        <Reveal y={40} delay={0.2}>
+          <div className="mt-12 sm:mt-16 flex flex-col lg:flex-row w-full bg-black shadow-2xl overflow-hidden min-h-[400px]">
+            {/* Left Image Area */}
+            <div className="w-full lg:w-[55%] relative min-h-[300px] lg:min-h-full bg-zinc-900">
+              {/* Using a placeholder gym/broadcast image. Replace src with your actual image */}
+              <img
+                src="/broadcast-backdrop.webp"
+                alt="Broadcast Rig"
+                className="absolute inset-0 w-full h-full object-cover "
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/80 lg:to-black" />
+            </div>
+
+            {/* Vertical/Horizontal Red Divider */}
+            <div className="h-1.5 w-full lg:h-auto lg:w-1.5 bg-[#bd1026] shrink-0" />
+
+            {/* Right Content Area */}
+            <div className="w-full lg:w-[45%] p-10 sm:p-14 lg:p-16 flex flex-col justify-center bg-black text-white relative z-10">
+              <div className="flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+                <span className="text-[#bd1026]">Broadcast Partner</span>
+                <span className="text-gray-500">Beyond Fight Night</span>
+              </div>
+
+              {/* Logo container - Swap the img src for your actual logo */}
+              <div className="mb-4">
+                <img
+                  src="/demo-room-logo.png"
+                  alt="Fight Network"
+                  className="h-full w-32 object-contain brightness-0 invert"
+                  onError={(e) => {
+                    // Fallback visual if image is missing
+                    e.currentTarget.style.display = "none";
+                    e.currentTarget.nextElementSibling?.classList.remove(
+                      "hidden",
+                    );
+                  }}
+                />
+               
+              </div>
+
+              <h3 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+                Built to be
+                <br className="hidden sm:block" /> watched.
+              </h3>
+
+              <p className="text-sm text-gray-400 max-w-md leading-relaxed">
+                Professional live fight broadcast production. SFL pairs an
+                intimate Toronto event with a broadcast platform built for
+                combat-sports audiences.
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
 
       {/* =========================================================
           DYNAMIC DRAWER FORM (Sponsor & Media)
       ========================================================= */}
-      <Drawer open={activeDrawer !== null} onOpenChange={(open) => !open && closeDrawer()}>
-        <DrawerContent className="bg-background border-t border-primary/20">
-          <div className="mx-auto w-full max-w-lg overflow-y-auto h-[85vh] sm:h-[80vh] flex flex-col px-4 py-6 sm:px-6">
-
+      <Drawer
+        open={activeDrawer !== null}
+        onOpenChange={(open) => !open && closeDrawer()}
+      >
+        <DrawerContent className="bg-white border-t-0 rounded-t-none">
+          <div className="mx-auto w-full max-w-lg overflow-y-auto h-[85vh] sm:h-[80vh] flex flex-col px-4 py-8 sm:px-6">
             <DrawerHeader className="text-left sm:text-center px-0">
-              <div className="mb-4 flex justify-start sm:justify-center">
-                <motion.span
-                  className={`h-1.5 w-16 ${activeDrawer === "sponsor" ? "hazard-stripes" : "bg-foreground/20"}`}
+              <div className="mb-6 flex justify-start sm:justify-center">
+                <motion.div
+                  className={`h-1.5 w-16 ${activeDrawer === "sponsor" ? "bg-[#bd1026]" : "bg-black"}`}
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.6 }}
                 />
               </div>
 
-              <DrawerTitle className="display text-3xl sm:text-5xl uppercase tracking-tighter">
+              <DrawerTitle className="text-4xl sm:text-5xl font-black uppercase tracking-tighter text-black">
                 {activeDrawer === "sponsor" ? (
-                  <>REQUEST <span className="text-primary">DECK</span></>
+                  <>
+                    REQUEST <span className="text-[#bd1026]">DECK</span>
+                  </>
                 ) : (
-                  <>MEDIA <span className="text-primary">INQUIRY</span></>
+                  <>
+                    MEDIA <span className="text-[#bd1026]">INQUIRY</span>
+                  </>
                 )}
               </DrawerTitle>
-              <DrawerDescription className="text-xs uppercase tracking-widest text-muted-foreground mt-2">
+              <DrawerDescription className="text-xs font-bold uppercase tracking-[0.15em] text-gray-500 mt-4">
                 {activeDrawer === "sponsor"
                   ? "Enter your details to receive our official sponsorship deck."
                   : "Submit your credentials for media access and press assets."}
               </DrawerDescription>
             </DrawerHeader>
 
-            <div className="mt-6 flex-1">
+            <div className="mt-8 flex-1">
               {success ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-10 text-center border border-primary/20 bg-primary/5 h-full"
+                  className="flex flex-col items-center justify-center py-12 text-center border-2 border-black/5 bg-gray-50 h-full"
                 >
-                  <CheckCircle2 className="h-12 w-12 text-primary mb-4" />
-                  <h3 className="display text-2xl uppercase">Request Sent</h3>
-                  <p className="text-xs text-muted-foreground mt-2 tracking-widest uppercase px-6">
+                  <CheckCircle2 className="h-14 w-14 text-green-600 mb-6" />
+                  <h3 className="text-3xl font-black uppercase tracking-tighter text-black">
+                    Request Sent
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-4 tracking-[0.15em] uppercase px-6 font-bold">
                     Our team will review your inquiry and be in touch shortly.
                   </p>
                   <DrawerClose
                     render={
-                      <Button className="mt-8 rounded-none px-8" variant="outline" />
+                      <Button className="mt-10 rounded-none px-10 h-14 bg-black text-white hover:bg-black/80 font-bold tracking-widest uppercase" />
                     }
                   >
                     Close
                   </DrawerClose>
                 </motion.div>
               ) : (
-                <form onSubmit={onSubmit} className="flex flex-col gap-4 pb-10">
-                  <div className="space-y-1.5">
-                    <label htmlFor="name" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <form onSubmit={onSubmit} className="flex flex-col gap-5 pb-10">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="name"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
+                    >
                       Full Name
                     </label>
-                    <Input id="name" name="name" required className="h-12 rounded-none border-border/50 bg-accent/30" />
+                    <Input
+                      id="name"
+                      name="name"
+                      required
+                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
+                    />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label htmlFor="entity" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                      {activeDrawer === "sponsor" ? "Brand / Company Name" : "Media Outlet / Publication"}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="entity"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
+                    >
+                      {activeDrawer === "sponsor"
+                        ? "Brand / Company Name"
+                        : "Media Outlet / Publication"}
                     </label>
-                    <Input id="entity" name="entity" required className="h-12 rounded-none border-border/50 bg-accent/30" />
+                    <Input
+                      id="entity"
+                      name="entity"
+                      required
+                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
+                    />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="email"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
+                    >
                       Professional Email
                     </label>
-                    <Input id="email" name="email" type="email" required className="h-12 rounded-none border-border/50 bg-accent/30" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
+                    />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label htmlFor="message" className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
+                    >
                       Additional Details (Optional)
                     </label>
-                    {/* Using a standard native textarea with Tailwind for the UI to avoid requiring shadcn's textarea if you don't have it installed */}
                     <textarea
                       id="message"
                       name="message"
-                      rows={3}
-                      className="flex w-full rounded-none border border-border/50 bg-accent/30 px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                      rows={4}
+                      className="flex w-full rounded-none border border-gray-300 bg-white px-3 py-3 text-sm text-black placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
 
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="h-14 w-full rounded-none text-sm font-black uppercase tracking-widest mt-4"
+                    className="h-14 w-full rounded-none text-xs font-black uppercase tracking-[0.2em] mt-6 bg-[#bd1026] text-white hover:bg-red-800 transition-colors"
                   >
                     {isPending ? (
-                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
+                      <>
+                        <Loader2 className="mr-3 h-5 w-5 animate-spin" />{" "}
+                        Processing...
+                      </>
                     ) : (
                       <>
-                        Submit Request <ArrowRight className="ml-2 h-4 w-4" />
+                        Submit Request <ArrowRight className="ml-3 h-5 w-5" />
                       </>
                     )}
                   </Button>
 
-                  <p className="text-center text-[10px] text-muted-foreground mt-2 uppercase tracking-widest flex items-center justify-center gap-2">
-                    <ShieldAlert className="h-3 w-3" /> Secure Submission
+                  <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2">
+                    <ShieldAlert className="h-3.5 w-3.5" /> Secure Submission
                   </p>
                 </form>
               )}
             </div>
-
           </div>
         </DrawerContent>
       </Drawer>
-
     </section>
   );
 }

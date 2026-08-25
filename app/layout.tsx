@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: '/header-logo.png',
+  },
   openGraph: {
     title,
     description,
@@ -49,7 +52,6 @@ export const metadata: Metadata = {
     follow: true,
   },
 }
-
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,

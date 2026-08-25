@@ -18,7 +18,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
         onOpenEarlyAccess={() => setEarlyAccessOpen(true)}
       />
 
-      <main className="container mx-auto max-w-6xl pt-16">{children}</main>
+      <main className="container mx-auto pt-16">{children}</main>
 
       <SiteFooter />
       <EarlyAccessDrawer

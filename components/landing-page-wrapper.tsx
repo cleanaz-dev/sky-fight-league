@@ -12,6 +12,8 @@ import { SimonMarcus } from "./site/simon-marcus";
 import { SiteFooter } from "./site/site-footer";
 import { SiteHeader } from "./site/site-header";
 import { Opportunities } from "./site/oppurtunities";
+import { AboutSection } from "./site/hero/about-section";
+import EventSection from "./site/event";
 
 export function LandingPageWrapper() {
   const isLocked = true;
@@ -34,11 +36,13 @@ export function LandingPageWrapper() {
         <SectionBreakBanner />
         
         {/* Make sure FightCard accepts these props if you updated it too! */}
+        <AboutSection />
         <FightCard 
           onOpenEarlyAccess={() => setEarlyAccessOpen(true)} 
         />
         
         <SimonMarcus />
+        <EventSection />
         <AboutLocation />
         <Opportunities />
         
