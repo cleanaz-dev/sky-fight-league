@@ -66,8 +66,6 @@ export function Opportunities() {
         <Reveal y={20}>
           <div className="px-6 md:px-12 lg:px-16 flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 sm:mb-16 gap-6 sm:gap-8">
             <div className="text-[11px] font-bold tracking-[0.2em] whitespace-nowrap pt-2">
-              <span className="text-[#c8102e]">03</span>
-              <span className="text-gray-400 mx-3">|</span>
               <span className="text-gray-500 uppercase">Partners & Press</span>
             </div>
 
@@ -196,7 +194,7 @@ export function Opportunities() {
                 {/* Logo container - Swap the img src for your actual logo */}
                 <div className="mb-8 h-8 sm:h-10 flex items-center">
                   <img
-                    src="/fight-network-logo.png"
+                    src="/demo-logo.png"
                     alt="Fight Network"
                     className="h-full w-auto object-contain"
                     onError={(e) => {
