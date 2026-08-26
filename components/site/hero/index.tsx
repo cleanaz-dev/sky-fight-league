@@ -18,8 +18,10 @@ interface HeroProps {
 
 export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden bg-accent pt-16">
-      
+    <section
+      id="top"
+      className="relative min-h-screen overflow-hidden bg-accent pt-16"
+    >
       {/* =========================================================
           ATMOSPHERIC BACKGROUND
       ========================================================= */}
@@ -51,7 +53,12 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
           className="pointer-events-none absolute left-1/2 top-[42%] z-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[22vw] opacity-[0.03] display text-transparent [-webkit-text-stroke:2px_white] tracking-tighter"
           initial={{ opacity: 0, x: "-48%" }}
           animate={{ opacity: 0.04, x: "-52%" }}
-          transition={{ duration: 10, repeat: Infinity, repeatType: "mirror", ease: "linear" }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "linear",
+          }}
         >
           CLASSIFIED
         </motion.span>
@@ -70,16 +77,32 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
       {/* =========================================================
           MAIN HERO CONTAINER
       ========================================================= */}
-      <div className={`relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col px-4 sm:px-6 ${isLocked ? "items-center justify-center py-12" : ""}`}>
-        
+      <div
+        className={`relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col px-4 sm:px-6 ${isLocked ? "items-center justify-center py-12" : ""}`}
+      >
         {/* EVENT EYEBROW (Shared across both states) */}
         <HeroReveal y={-16} delay={0}>
-          <div className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center ${isLocked ? "mb-6 sm:mb-10" : "pt-8"}`}>
-            <motion.span className="hazard-stripes h-2 w-12 sm:w-16" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.15 }} style={{ transformOrigin: "left" }} />
+          <div
+            className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center ${isLocked ? "mb-6 sm:mb-10" : "pt-8"}`}
+          >
+            <motion.span
+              className="hazard-stripes h-2 w-12 sm:w-16"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              style={{ transformOrigin: "left" }}
+            />
             <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-muted-foreground sm:text-xs">
-              {EVENT.number} <span className="text-primary">/</span> {isLocked ? "TO BE ANNOUNCED" : EVENT.title}
+              {EVENT.number} <span className="text-primary">/</span>{" "}
+              {isLocked ? "TO BE ANNOUNCED" : EVENT.title}
             </p>
-            <motion.span className="hazard-stripes h-2 w-12 sm:w-16" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.6, delay: 0.15 }} style={{ transformOrigin: "right" }} />
+            <motion.span
+              className="hazard-stripes h-2 w-12 sm:w-16"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              style={{ transformOrigin: "right" }}
+            />
           </div>
         </HeroReveal>
 
@@ -88,19 +111,29 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
              LOCKED STATE VIEW
           ======================================================= */
           <div className="flex w-full flex-col items-center">
-            
             {/* SQUARE REVEAL DATE BOX */}
             <HeroReveal y={20} delay={0.15}>
-              <div className="mb-6 flex aspect-square w-32 flex-col items-center justify-center border-2 border-white/20 bg-black/40 backdrop-blur-sm sm:mb-8 sm:w-40">
-                <span className="mb-2 text-center text-[9px] font-bold uppercase tracking-[0.3em] text-primary sm:text-[10px]">
-                  Card Reveal
-                </span>
-                <span className="text-xl font-black tracking-widest text-white sm:text-2xl">
-                  09.17.26
-                </span>
+              <div className="relative mx-auto mb-6 hidden h-48 w-48 flex-col items-center sm:mb-8 sm:flex sm:size-72">
+                {/* Darkened Background Image */}
+                <div
+                  className="absolute inset-0 bg-[url('/lock.png')] bg-contain bg-center bg-no-repeat opacity-40 mix-blend-luminosity transition-opacity duration-300 hover:opacity-50"
+                  aria-hidden="true"
+                />
+
+                {/* Text Content overlay */}
+                <div className="absolute inset-x-0 top-[62%] z-10 flex -translate-y-1/2 flex-col items-center justify-center px-4">
+                  {/* 1. AGGRESSIVE SUBTITLE: Bright red, black weight, italic, extra wide tracking */}
+                  <span className="mb-0.5 text-center text-[10px] font-black uppercase italic tracking-[0.4em] text-red-600 drop-shadow-md sm:text-xs">
+                    Card Reveal
+                  </span>
+
+                  {/* 2. AGGRESSIVE DATE: Larger, italic, stark white with a harsh red glow/shadow */}
+                  <span className="text-xl font-black italic tracking-widest text-white drop-shadow-[0_0_15px_rgba(220,38,38,0.8)] sm:text-3xl">
+                    09.17.26
+                  </span>
+                </div>
               </div>
             </HeroReveal>
-
             {/* MAIN HEADLINE */}
             <HeroReveal y={20} delay={0.25}>
               <h1 className="display flex flex-col items-center text-center text-5xl leading-[0.85] tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
@@ -159,7 +192,14 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
           ======================================================= */
           <>
             <div className="relative grid flex-1 grid-cols-2 items-center gap-0 pt-6 md:pt-2">
-              <HeroReveal x={-45} y={15} scale={0.96} delay={0.15} duration={0.9} className="relative z-10">
+              <HeroReveal
+                x={-45}
+                y={15}
+                scale={0.96}
+                delay={0.15}
+                duration={0.9}
+                className="relative z-10"
+              >
                 <FighterColumn
                   image="/fighter-red.png"
                   video="/fighter-white-loop.mp4"
@@ -172,7 +212,14 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
 
               <CenterVs rounds={MAIN_EVENT.rounds} />
 
-              <HeroReveal x={45} y={15} scale={0.96} delay={0.25} duration={0.9} className="relative z-10">
+              <HeroReveal
+                x={45}
+                y={15}
+                scale={0.96}
+                delay={0.25}
+                duration={0.9}
+                className="relative z-10"
+              >
                 <FighterColumn
                   image="/fighter-white.png"
                   video="/fighter-red-loop.mp4"
@@ -183,8 +230,13 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
                 />
               </HeroReveal>
             </div>
-            
-            <EventInfo weightClass={MAIN_EVENT.weightClass} date={EVENT.date} venue={EVENT.venue} city={EVENT.city} />
+
+            <EventInfo
+              weightClass={MAIN_EVENT.weightClass}
+              date={EVENT.date}
+              venue={EVENT.venue}
+              city={EVENT.city}
+            />
           </>
         )}
       </div>

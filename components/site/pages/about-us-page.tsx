@@ -87,7 +87,6 @@ export default function AboutPage() {
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_2fr] lg:gap-16 xl:gap-24">
             <div>
               <div className="flex items-center gap-3">
-                
                 <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-black/60">
                   What we are building
                 </h2>
@@ -129,7 +128,6 @@ export default function AboutPage() {
         {/* Increased padding for wider screens */}
         <div className="flex flex-col justify-center p-10 sm:p-16 lg:p-24 xl:p-32">
           <div className="flex items-center gap-3">
-           
             <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/50">
               Why SFL
             </h2>
@@ -157,7 +155,6 @@ export default function AboutPage() {
         {/* TEXT (Rendered first on desktop, second on mobile) */}
         <div className="order-2 flex flex-col justify-center p-10 sm:p-16 lg:order-1 lg:border-r lg:border-white/10 lg:p-24 xl:p-32">
           <div className="flex items-center gap-3">
-          
             <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/50">
               Beyond the cage
             </h2>
@@ -209,7 +206,6 @@ export default function AboutPage() {
 
         <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6">
           <div className="flex items-center gap-3">
-          
             <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/70">
               The long-term vision
             </h2>
@@ -228,15 +224,12 @@ export default function AboutPage() {
           </p>
 
           <Button
-           
             variant="default"
             size="lg"
             className="flex items-center gap-2 mt-12 rounded-none bg-white px-10 py-6 text-sm font-bold uppercase tracking-widest text-black hover:bg-primary hover:text-white"
           >
-           
-              Get First Access
-              <ArrowRight className="ml-3 h-5 w-5" />
-         
+            Get First Access
+            <ArrowRight className="ml-3 h-5 w-5" />
           </Button>
         </div>
       </section>
@@ -259,9 +252,8 @@ export default function AboutPage() {
             {/* Bio Text */}
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-3">
-               
                 <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/50">
-                  Co-Founder
+                  Founder
                 </h2>
               </div>
 
@@ -284,7 +276,7 @@ export default function AboutPage() {
                   League.
                 </p>
                 <p className="border-l-2 border-primary pl-6 font-semibold text-white">
-                  As co-founder, his vision is to create the kind of platform
+                  As founder, his vision is to create the kind of platform
                   athletes can trust and audiences can believe in.
                 </p>
               </div>
@@ -298,6 +290,71 @@ export default function AboutPage() {
                   SFL 001 · November 28, 2026 · Toronto
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          BLOCK 7: EFE BIO (MIRRORED ALIGNMENT)
+      ========================================================= */}
+      <section className="border-t border-white/10 bg-black px-4 py-24 text-white sm:px-6 sm:py-32 xl:px-12 xl:py-40">
+        <div className="mx-auto max-w-[100rem]">
+          <div className="grid gap-12 lg:grid-cols-[1.8fr_1fr] lg:gap-20 xl:gap-32">
+            {/* Bio Text (Left on desktop this time) */}
+            <div className="order-2 flex flex-col justify-center lg:order-1">
+              <div className="flex items-center gap-3">
+                <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/50">
+                  Co-Founder
+                </h2>
+              </div>
+
+              <h3 className="display mt-6 text-6xl leading-none text-white sm:text-8xl xl:text-9xl">
+                Efe Tarik
+                <br />
+                <span className="text-white/40">Caliskan</span>
+              </h3>
+
+              <div className="mt-10 max-w-3xl space-y-6 text-lg leading-relaxed text-white/70 xl:text-xl">
+                <p>
+                  Efe Tarik Caliskan is a three-time Canadian Muay Thai Champion
+                  and former BFL 160-lb Kickboxing Champion, with a career built
+                  across rings in Canada and Thailand.
+                </p>
+                <p>
+                  A former #1-ranked WBC Muay Thai fighter at 168 lbs, Efe has
+                  competed at Rajadamnern Stadium and made a successful
+                  transition into MMA, bringing a fighter-first perspective to
+                  every decision at Sky Fight League.
+                </p>
+                <p className="border-l-2 border-primary pl-6 font-semibold text-white">
+                  As co-founder, Efe is focused on building a platform that
+                  reflects the standards and sacrifice competition demands.
+                </p>
+              </div>
+
+              {/* Event stamp */}
+              <div className="mt-12 inline-block max-w-max border border-white/10 bg-white/[0.02] p-5">
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
+                  Sky Fight League
+                </p>
+                <p className="mt-1 font-mono text-sm font-semibold text-primary">
+                  SFL 001 · November 28, 2026 · Toronto
+                </p>
+              </div>
+            </div>
+
+            {/* Bio Image (Right on desktop this time) */}
+            <div className="order-1 relative aspect-[4/5] w-full max-w-xl overflow-hidden border border-white/10 lg:order-2 lg:ml-auto">
+              <span
+                aria-hidden="true"
+                className="hazard-stripes absolute inset-x-0 top-0 z-10 h-1"
+              />
+              <SlowZoomImage
+                src="/efe-about.png"
+                alt="Efe Tarik Caliskan - Co-Founder"
+              />
+              <div className="absolute inset-0 bg-black/30" />
             </div>
           </div>
         </div>

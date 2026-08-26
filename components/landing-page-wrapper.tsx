@@ -14,6 +14,7 @@ import { SiteHeader } from "./site/site-header";
 import { Opportunities } from "./site/oppurtunities";
 import { AboutSection } from "./site/hero/about-section";
 import EventSection from "./site/event";
+import FoundersSection from "./site/founder-section";
 
 export function LandingPageWrapper() {
   const isLocked = true;
@@ -41,7 +42,7 @@ export function LandingPageWrapper() {
           onOpenEarlyAccess={() => setEarlyAccessOpen(true)} 
         />
         
-        <SimonMarcus />
+        <FoundersSection />
         <EventSection />
         <AboutLocation />
         <Opportunities />

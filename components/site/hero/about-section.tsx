@@ -82,7 +82,6 @@ export function AboutSection() {
       ========================================================= */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-          
           {/* LEFT COLUMN: Text Content */}
           <div className="flex flex-col justify-center">
             <Reveal y={20}>
@@ -134,7 +133,7 @@ export function AboutSection() {
                 variant="default"
                 className="mt-10 h-14 rounded-none bg-black px-8 text-sm font-bold uppercase tracking-widest text-white hover:bg-primary hover:text-white"
               >
-                <Link href="/about">
+                <Link href="/about" className="flex items-center gap-2">
                   Read The Full Story
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
@@ -183,7 +182,6 @@ export function AboutSection() {
               );
             })}
           </div>
-
         </div>
       </div>
     </section>

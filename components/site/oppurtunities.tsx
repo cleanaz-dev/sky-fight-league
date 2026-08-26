@@ -193,17 +193,23 @@ export function Opportunities() {
 
                 {/* Logo container - Swap the img src for your actual logo */}
                 <div className="mb-8 h-8 sm:h-10 flex items-center">
-                  <img
-                    src="/demo-logo.png"
-                    alt="Fight Network"
-                    className="h-full w-auto object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.nextElementSibling?.classList.remove(
-                        "hidden",
-                      );
-                    }}
-                  />
+                  <a
+                    href="https://fightnetwork.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="/demo-room-logo.png"
+                      alt="Fight Network"
+                      className="h-auto w-24 object-contain brightness-0 invert"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.remove(
+                          "hidden",
+                        );
+                      }}
+                    />
+                  </a>
                   {/* Fallback text block that mimics a logo if image fails */}
                   <div className="hidden flex items-center text-2xl sm:text-3xl font-black tracking-tighter">
                     <div className="bg-white text-black px-2 py-0.5 mr-2">
@@ -215,7 +221,6 @@ export function Opportunities() {
                     </span>
                   </div>
                 </div>
-
                 <h3 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
                   Built to be
                   <br className="hidden sm:block" /> watched.

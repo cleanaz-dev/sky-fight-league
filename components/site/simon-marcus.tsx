@@ -78,10 +78,7 @@ export function SimonMarcus() {
             {/* Mini Speal */}
             <div className="mt-10 max-w-md border-l-0 border-primary/30 pl-0 lg:border-l-2 lg:pl-6">
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Widely recognized as the most decorated Canadian Muay Thai champion in history. 
-                Simon brings his world-class pedigree, relentless championship mindset, and unparalleled 
-                striking expertise to the core of our DNA. Building the future of MMA from the ground up, 
-                for the fighters, by a fighter.
+An eight-time Muay Thai World Champion and Canada’s most decorated Muay Thai athlete, Simon Marcus brings an elite championship pedigree and years of world-class competition to Sky Fight League. As Co-Founder of SFL, he is helping build a fighter-first platform defined by high standards, discipline, and greater opportunity for the next generation of combat athletes.
               </p>
             </div>
 
