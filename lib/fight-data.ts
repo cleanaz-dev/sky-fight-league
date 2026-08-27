@@ -1,3 +1,36 @@
+import { formatInTimeZone, fromZonedTime } from 'date-fns-tz'
+
+const TIMEZONE = 'America/Toronto'
+
+/**
+ * Formats an ISO timestamp as MM.DD.YY in the event's local timezone.
+ * e.g. '2026-09-24T00:00:00-04:00' -> '09.24.26'
+ */
+export function formatRevealDate(isoString: string): string {
+  return formatInTimeZone(isoString, TIMEZONE, 'MM.dd.yy')
+}
+
+// e.g. '2026-09-24T00:00:00-04:00' -> 'September 24'
+export function formatRevealDateLong(isoString: string): string {
+  return formatInTimeZone(isoString, 'America/Toronto', 'MMMM d')
+}
+
+export const EVENT = {
+  number: 'SFL 001',
+  title: 'The Inaugural Event',
+  date: 'Saturday, November 28, 2026',
+  // First bout 6:30 PM Eastern. Drives the countdown timer.
+  scheduledAt: fromZonedTime('2026-11-28 18:30:00', TIMEZONE).toISOString(),
+  doors: 'Doors 5:00 PM \u2014 First Bout 6:30 PM',
+  venue: 'DEMO ROOM',
+  city: 'Toronto, Ontario',
+  address: "307 Lake Shore Blvd E, M5A 1C1",
+  cardReveal: 'Thursday, September 24, 2026',
+  cardRevealAt: fromZonedTime('2026-09-24 00:00:00', TIMEZONE).toISOString(),
+}
+
+
+
 export type Fighter = {
   name: string
   nickname: string
@@ -14,17 +47,7 @@ export type Bout = {
   white: Fighter
 }
 
-export const EVENT = {
-  number: 'SFL 001',
-  title: 'The Inaugural Event',
-  date: 'Saturday, November 28, 2026',
-  // First bout 6:30 PM Eastern. Drives the countdown timer.
-  scheduledAt: '2026-11-28T18:30:00-05:00',
-  doors: 'Doors 5:00 PM \u2014 First Bout 6:30 PM',
-  venue: 'DEMO ROOM',
-  city: 'Toronto, Ontario',
-  address: "307 Lake Shore Blvd E, M5A 1C1"
-}
+
 export const MAIN_EVENT: Bout = {
   weightClass: 'Lightweight Championship',
   isTitle: true,

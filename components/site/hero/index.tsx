@@ -4,7 +4,8 @@ import Image from "next/image";
 import { motion } from "framer-motion"; // Note: changed from motion/react to standard framer-motion based on typical ecosystem
 import { Calendar, MapPin, Bell } from "lucide-react";
 
-import { EVENT, MAIN_EVENT } from "@/lib/fight-data";
+import { EVENT, formatRevealDate, MAIN_EVENT } from "@/lib/fight-data";
+
 import { HeroReveal } from "./hero-reveal";
 import { FighterColumn } from "./fighter-column";
 import { CenterVs } from "./center-vs";
@@ -129,7 +130,7 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
 
                   {/* 2. AGGRESSIVE DATE: Larger, italic, stark white with a harsh red glow/shadow */}
                   <span className="text-xl font-black italic tracking-widest text-white drop-shadow-[0_0_15px_rgba(220,38,38,0.8)] sm:text-3xl">
-                    09.17.26
+                    {formatRevealDate(EVENT.cardRevealAt)}
                   </span>
                 </div>
               </div>

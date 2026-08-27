@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Lock } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { EVENT } from "@/lib/fight-data";
+import { formatRevealDateLong } from "@/lib/fight-data";
 
 // ============================================================================
 // COMPONENTS
@@ -180,7 +181,7 @@ export default function EventSection() {
                   </span>
 
                   <h2 className="display mt-4 text-4xl uppercase leading-[0.9] sm:text-5xl">
-                    September 17
+                    {formatRevealDateLong(EVENT.cardRevealAt)}
                   </h2>
 
                   <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/40">
