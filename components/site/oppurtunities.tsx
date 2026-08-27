@@ -22,9 +22,10 @@ type DrawerType = "sponsor" | "media" | null;
 export function Opportunities() {
   const [activeDrawer, setActiveDrawer] = useState<DrawerType>(null);
 
-  // Form State
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,20 +33,28 @@ export function Opportunities() {
 
     formData.append("type", activeDrawer as string);
 
+    setError(null);
+
     startTransition(async () => {
       const result = await submitOpportunity(formData);
       if (result.success) {
         setSuccess(true);
+        setMessage(result.message ?? null);
+      } else {
+        setError(result.error ?? "Something went wrong. Please try again.");
       }
     });
   }
 
   function closeDrawer() {
     setActiveDrawer(null);
-    setTimeout(() => setSuccess(false), 300);
+    setTimeout(() => {
+      setSuccess(false);
+      setMessage(null);
+      setError(null);
+    }, 300);
   }
 
-  // CSS for the diagonal stripe patterns
   const redStripes = {
     backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px)`,
   };
@@ -60,9 +69,6 @@ export function Opportunities() {
       className="relative overflow-hidden bg-[#f3f2ef] py-24 sm:py-32 font-sans"
     >
       <div className="relative mx-auto max-w-[1400px]">
-        {/* =======================================================
-            HEADER
-        ======================================================= */}
         <Reveal y={20}>
           <div className="px-6 md:px-12 lg:px-16 flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 sm:mb-16 gap-6 sm:gap-8">
             <div className="text-[11px] font-bold tracking-[0.2em] whitespace-nowrap pt-2">
@@ -74,7 +80,7 @@ export function Opportunities() {
               <span
                 className="block mt-1"
                 style={{
-                  color: "#f3f2ef" /* Matches background color */,
+                  color: "#f3f2ef",
                   textShadow:
                     "-1.5px -1.5px 0 #111, 1.5px -1.5px 0 #111, -1.5px 1.5px 0 #111, 1.5px 1.5px 0 #111",
                 }}
@@ -85,19 +91,13 @@ export function Opportunities() {
           </div>
         </Reveal>
 
-        {/* =======================================================
-            PARTNERSHIP OPPORTUNITIES GRID
-        ======================================================= */}
         <Reveal y={30} delay={0.1}>
-          {/* px-0 on mobile makes it edge-to-edge, sm:px-6 brings padding back on larger screens */}
           <div className="px-0 sm:px-6 md:px-12 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 w-full shadow-none sm:shadow-2xl">
-              {/* 01: BRAND PARTNERS (RED CARD) */}
               <div
                 className="relative bg-[#bd1026] text-white p-8 sm:p-14 lg:p-20 overflow-hidden flex flex-col justify-between min-h-[400px] sm:min-h-[450px]"
                 style={redStripes}
               >
-                {/* Background Number */}
                 <div className="absolute top-4 right-6 text-[8rem] sm:text-[12rem] font-black opacity-10 leading-none select-none">
                   01
                 </div>
@@ -126,12 +126,10 @@ export function Opportunities() {
                 </div>
               </div>
 
-              {/* 02: MEDIA PARTNERS (WHITE CARD) */}
               <div
                 className="relative bg-white text-black p-8 sm:p-14 lg:p-20 overflow-hidden flex flex-col justify-between min-h-[400px] sm:min-h-[450px]"
                 style={whiteStripes}
               >
-                {/* Background Number */}
                 <div className="absolute top-4 right-6 text-[8rem] sm:text-[12rem] font-black opacity-[0.03] leading-none select-none">
                   02
                 </div>
@@ -163,16 +161,10 @@ export function Opportunities() {
           </div>
         </Reveal>
 
-        {/* =======================================================
-            BROADCAST PARTNER
-        ======================================================= */}
         <Reveal y={40} delay={0.2}>
-          {/* px-0 on mobile makes it edge-to-edge */}
           <div className="px-0 sm:px-6 md:px-12 lg:px-16 mt-12 sm:mt-16">
             <div className="flex flex-col lg:flex-row w-full bg-black shadow-none sm:shadow-2xl overflow-hidden min-h-[400px]">
-              {/* Left Image Area */}
               <div className="w-full lg:w-[55%] relative min-h-[250px] sm:min-h-[300px] lg:min-h-full bg-zinc-900">
-                {/* Using a placeholder gym/broadcast image. Replace src with your actual image */}
                 <img
                   src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&q=80"
                   alt="Broadcast Rig"
@@ -181,19 +173,16 @@ export function Opportunities() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/80 lg:to-black" />
               </div>
 
-              {/* Vertical/Horizontal Red Divider */}
               <div className="h-1.5 w-full lg:h-auto lg:w-1.5 bg-[#bd1026] shrink-0" />
 
-              {/* Right Content Area */}
               <div className="w-full lg:w-[45%] p-8 sm:p-14 lg:p-16 flex flex-col justify-center bg-black text-white relative z-10">
                 <div className="flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10">
                   <span className="text-[#bd1026]">Broadcast Partner</span>
                   <span className="text-gray-500">Beyond Fight Night</span>
                 </div>
 
-                {/* Logo container - Swap the img src for your actual logo */}
                 <div className="mb-8 h-8 sm:h-10 flex items-center">
-                  <a
+                 <a 
                     href="https://fightnetwork.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -210,7 +199,6 @@ export function Opportunities() {
                       }}
                     />
                   </a>
-                  {/* Fallback text block that mimics a logo if image fails */}
                   <div className="hidden flex items-center text-2xl sm:text-3xl font-black tracking-tighter">
                     <div className="bg-white text-black px-2 py-0.5 mr-2">
                       F
@@ -237,9 +225,6 @@ export function Opportunities() {
         </Reveal>
       </div>
 
-      {/* =========================================================
-          DYNAMIC DRAWER FORM (Sponsor & Media)
-      ========================================================= */}
       <Drawer
         open={activeDrawer !== null}
         onOpenChange={(open) => !open && closeDrawer()}
@@ -286,7 +271,7 @@ export function Opportunities() {
                     Request Sent
                   </h3>
                   <p className="text-xs text-gray-500 mt-4 tracking-[0.15em] uppercase px-6 font-bold">
-                    Our team will review your inquiry and be in touch shortly.
+                    {message ?? "Our team will review your inquiry and be in touch shortly."}
                   </p>
                   <DrawerClose
                     render={
@@ -360,6 +345,12 @@ export function Opportunities() {
                       className="flex w-full rounded-none border border-gray-300 bg-white px-3 py-3 text-sm text-black placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
+
+                  {error && (
+                    <p className="text-xs font-bold uppercase tracking-wide text-[#bd1026]">
+                      {error}
+                    </p>
+                  )}
 
                   <Button
                     type="submit"

@@ -11,3 +11,33 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum ContactType {
+  EARLY_ACCESS
+  NEWSLETTER
+  TICKET_WAITLIST
+  SPONSOR_INQUIRY
+  MEDIA_INQUIRY
+  GENERAL
+}
+
+enum ContactStatus {
+  ACTIVE
+  UNSUBSCRIBED
+  BOUNCED
+}
+
+model Contact {
+  id        String        @id @default(cuid())
+  name      String?
+  email     String
+  type      ContactType
+  status    ContactStatus @default(ACTIVE)
+  metadata  Json? // freeform: source page, UTM params, notes, etc.
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@unique([email, type])
+  @@index([type])
+  @@index([status])
+}

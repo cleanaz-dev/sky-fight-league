@@ -25,17 +25,22 @@ export function EarlyAccessDrawer({
 }) {
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
+    setError(null);
+
     startTransition(async () => {
       const result = await submitEarlyAccess(formData);
       if (result.success) {
         setSuccess(true);
-        // Optional: Auto-close after a few seconds
-        // setTimeout(() => { onOpenChange(false); setSuccess(false); }, 3000);
+        setMessage(result.message ?? null);
+      } else {
+        setError(result.error ?? "Something went wrong. Please try again.");
       }
     });
   }
@@ -74,7 +79,7 @@ export function EarlyAccessDrawer({
                 <CheckCircle2 className="h-12 w-12 text-primary mb-4" />
                 <h3 className="display text-2xl uppercase">You're Locked In</h3>
                 <p className="text-xs text-muted-foreground mt-2 tracking-widest uppercase">
-                  Keep a close eye on your inbox.
+                  {message ?? "Keep a close eye on your inbox."}
                 </p>
                 <DrawerClose
                   render={
@@ -112,6 +117,12 @@ export function EarlyAccessDrawer({
                     className="h-14 rounded-none border-border/50 bg-accent/30 text-base"
                   />
                 </div>
+
+                {error && (
+                  <p className="text-center text-xs font-semibold uppercase tracking-widest text-destructive">
+                    {error}
+                  </p>
+                )}
 
                 <Button 
                   type="submit" 
