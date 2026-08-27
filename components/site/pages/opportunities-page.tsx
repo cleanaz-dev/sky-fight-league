@@ -30,6 +30,8 @@ export function OpportunitiesPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,11 +39,16 @@ export function OpportunitiesPage() {
     const formData = new FormData(e.currentTarget);
     formData.append("type", "general_conversation");
 
+    setError(null);
+
     startTransition(async () => {
       const result = await submitOpportunity(formData);
 
       if (result.success) {
         setSuccess(true);
+        setMessage(result.message ?? null);
+      } else {
+        setError(result.error ?? "Something went wrong. Please try again.");
       }
     });
   }
@@ -49,7 +56,11 @@ export function OpportunitiesPage() {
   function handleClose() {
     setDrawerOpen(false);
 
-    setTimeout(() => setSuccess(false), 300);
+    setTimeout(() => {
+      setSuccess(false);
+      setMessage(null);
+      setError(null);
+    }, 300);
   }
 
   return (
@@ -57,10 +68,6 @@ export function OpportunitiesPage() {
       id="opportunities"
       className="relative overflow-hidden border-t border-border bg-accent py-20 sm:py-28"
     >
-      {/* =========================================================
-          BACKGROUND DECORATION
-      ========================================================= */}
-
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-[-12rem] top-32 h-[30rem] w-[30rem] rounded-full border-[50px] border-primary/[0.035]"
@@ -72,10 +79,6 @@ export function OpportunitiesPage() {
       />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        {/* =======================================================
-            HEADER
-        ======================================================= */}
-
         <div className="max-w-4xl">
           <Reveal y={20}>
             <p className="text-xs font-bold uppercase tracking-[0.35em] text-primary">
@@ -101,13 +104,7 @@ export function OpportunitiesPage() {
           </Reveal>
         </div>
 
-        {/* =======================================================
-            PARTNERSHIP OPPORTUNITIES
-        ======================================================= */}
-
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {/* BRAND PARTNERS */}
-
           <Reveal x={-45} y={10} scale={0.96}>
             <div className="group relative h-full overflow-hidden border border-border bg-card transition-colors duration-500 hover:border-primary/40">
               <span
@@ -152,8 +149,6 @@ export function OpportunitiesPage() {
               </div>
             </div>
           </Reveal>
-
-          {/* MEDIA PARTNERS */}
 
           <Reveal x={45} y={10} scale={0.96} delay={0.08}>
             <div className="group relative h-full overflow-hidden border border-border bg-card transition-colors duration-500 hover:border-primary/40">
@@ -201,10 +196,6 @@ export function OpportunitiesPage() {
           </Reveal>
         </div>
 
-        {/* =======================================================
-            EVENT FOOTER / CONVERSATION CTA
-        ======================================================= */}
-
         <Reveal y={30} scale={0.97} delay={0.1}>
           <div className="mt-14 flex flex-col gap-6 border border-border bg-card p-7 sm:p-9 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
@@ -232,10 +223,6 @@ export function OpportunitiesPage() {
           </div>
         </Reveal>
 
-        {/* =======================================================
-            DISCLAIMER
-        ======================================================= */}
-
         <Reveal delay={0.15} y={15}>
           <p className="mt-8 max-w-5xl text-[11px] leading-relaxed text-muted-foreground/70">
             Final bouts, media rights, placements and deliverables are subject
@@ -245,10 +232,6 @@ export function OpportunitiesPage() {
           </p>
         </Reveal>
       </div>
-
-      {/* =========================================================
-          START A CONVERSATION DRAWER
-      ========================================================= */}
 
       <Drawer
         open={drawerOpen}
@@ -290,8 +273,7 @@ export function OpportunitiesPage() {
                   </h3>
 
                   <p className="mt-2 px-6 text-xs uppercase tracking-widest text-muted-foreground">
-                    Thank you. A member of our executive team will be in touch
-                    shortly.
+                    {message ?? "Thank you. A member of our executive team will be in touch shortly."}
                   </p>
 
                   <DrawerClose
@@ -374,6 +356,12 @@ export function OpportunitiesPage() {
                       className="flex w-full rounded-none border border-border/50 bg-accent/30 px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
+
+                  {error && (
+                    <p className="text-center text-xs font-bold uppercase tracking-widest text-destructive">
+                      {error}
+                    </p>
+                  )}
 
                   <Button
                     type="submit"
