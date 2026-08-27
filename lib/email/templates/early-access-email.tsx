@@ -1,5 +1,6 @@
-// emails/early-access-email.tsx
-import { Html, Head, Body, Container, Heading, Text, Preview } from "react-email";
+// lib/email/templates/early-access-email.tsx
+import { Heading, Text } from "react-email";
+import { EmailLayout } from "./email-layout";
 
 interface EarlyAccessEmailProps {
   name: string;
@@ -7,22 +8,19 @@ interface EarlyAccessEmailProps {
 
 export default function EarlyAccessEmail({ name }: EarlyAccessEmailProps) {
   return (
-    <Html>
-      <Head />
-      <Preview>You're on the Sky Fight League early access list</Preview>
-      <Body style={{ backgroundColor: "#111111", fontFamily: "sans-serif" }}>
-        <Container style={{ padding: "40px 20px", color: "#ffffff" }}>
-          <Heading style={{ color: "#ffffff" }}>You're in, {name}.</Heading>
-          <Text style={{ color: "#cccccc" }}>
-            Thanks for signing up for early access to Sky Fight League. We'll
-            email you as soon as tickets, fighter announcements, and event
-            details go live.
-          </Text>
-          <Text style={{ color: "#888888", fontSize: "12px" }}>
-            Sky Fight League — Toronto
-          </Text>
-        </Container>
-      </Body>
-    </Html>
+    <EmailLayout previewText="You're on the Sky Fight League early access list">
+      <Text className="text-primary text-xs font-bold tracking-[0.2em] uppercase m-0 mb-3">
+        Status: Confirmed
+      </Text>
+      <Heading className="font-display text-4xl text-foreground uppercase m-0 mb-4 tracking-wide leading-none">
+        You're in, {name}.
+      </Heading>
+      <Text className="text-muted text-base leading-relaxed m-0 mb-6">
+        Thanks for stepping into the arena. You are officially on the early access list for Sky Fight League. 
+      </Text>
+      <Text className="text-muted text-base leading-relaxed m-0">
+        Keep an eye on your inbox. We'll alert you the moment tickets, fighter rosters, and official event details go live.
+      </Text>
+    </EmailLayout>
   );
 }

@@ -1,6 +1,8 @@
 // lib/email/templates/opportunity-inquiry-email.tsx
-import { Html, Head, Body, Container, Heading, Text, Preview } from "react-email";
+import { Heading, Text } from "react-email";
+
 import type { ContactType } from "@/lib/generated/prisma/client";
+import { EmailLayout } from "./email-layout";
 
 interface OpportunityInquiryEmailProps {
   name: string;
@@ -16,25 +18,18 @@ const COPY: Record<string, string> = {
     "We've received your message. A member of our executive team will be in touch shortly.",
 };
 
-export default function OpportunityInquiryEmail({
-  name,
-  contactType,
-}: OpportunityInquiryEmailProps) {
+export default function OpportunityInquiryEmail({ name, contactType }: OpportunityInquiryEmailProps) {
   return (
-    <Html>
-      <Head />
-      <Preview>Your inquiry has been received</Preview>
-      <Body style={{ backgroundColor: "#111111", fontFamily: "sans-serif" }}>
-        <Container style={{ padding: "40px 20px", color: "#ffffff" }}>
-          <Heading style={{ color: "#ffffff" }}>Thanks, {name}.</Heading>
-          <Text style={{ color: "#cccccc" }}>
-            {COPY[contactType] ?? COPY.GENERAL}
-          </Text>
-          <Text style={{ color: "#888888", fontSize: "12px" }}>
-            Sky Fight League — Toronto
-          </Text>
-        </Container>
-      </Body>
-    </Html>
+    <EmailLayout previewText="Your inquiry has been received">
+      <Text className="text-primary text-xs font-bold tracking-[0.2em] uppercase m-0 mb-3">
+        Message Received
+      </Text>
+      <Heading className="font-display text-4xl text-foreground uppercase m-0 mb-4 tracking-wide leading-none">
+        Thanks, {name}.
+      </Heading>
+      <Text className="text-muted text-base leading-relaxed m-0">
+        {COPY[contactType] ?? COPY.GENERAL}
+      </Text>
+    </EmailLayout>
   );
 }
