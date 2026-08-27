@@ -182,7 +182,7 @@ export function Opportunities() {
                 </div>
 
                 <div className="mb-8 h-8 sm:h-10 flex items-center">
-                 <a 
+                  <a
                     href="https://fightnetwork.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -230,9 +230,9 @@ export function Opportunities() {
         onOpenChange={(open) => !open && closeDrawer()}
       >
         <DrawerContent className="bg-white border-t-0 rounded-t-none">
-          <div className="mx-auto w-full max-w-lg overflow-y-auto h-[85vh] sm:h-[80vh] flex flex-col px-4 py-8 sm:px-6">
+          <div className="mx-auto w-full max-w-lg overflow-y-auto h-auto max-h-[90vh] flex flex-col px-4 py-6 sm:px-6">
             <DrawerHeader className="text-left sm:text-center px-0">
-              <div className="mb-6 flex justify-start sm:justify-center">
+              <div className="mb-4 flex justify-start sm:justify-center">
                 <motion.div
                   className={`h-1.5 w-16 ${activeDrawer === "sponsor" ? "bg-[#bd1026]" : "bg-black"}`}
                   initial={{ scaleX: 0 }}
@@ -252,14 +252,14 @@ export function Opportunities() {
                   </>
                 )}
               </DrawerTitle>
-              <DrawerDescription className="text-xs font-bold uppercase tracking-[0.15em] text-gray-500 mt-4">
+              <DrawerDescription className="text-xs font-bold uppercase tracking-[0.15em] text-gray-500 mt-3">
                 {activeDrawer === "sponsor"
                   ? "Enter your details to receive our official sponsorship deck."
                   : "Submit your credentials for media access and press assets."}
               </DrawerDescription>
             </DrawerHeader>
 
-            <div className="mt-8 flex-1">
+            <div className="mt-6 flex-1">
               {success ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -271,7 +271,8 @@ export function Opportunities() {
                     Request Sent
                   </h3>
                   <p className="text-xs text-gray-500 mt-4 tracking-[0.15em] uppercase px-6 font-bold">
-                    {message ?? "Our team will review your inquiry and be in touch shortly."}
+                    {message ??
+                      "Our team will review your inquiry and be in touch shortly."}
                   </p>
                   <DrawerClose
                     render={
@@ -282,8 +283,8 @@ export function Opportunities() {
                   </DrawerClose>
                 </motion.div>
               ) : (
-                <form onSubmit={onSubmit} className="flex flex-col gap-5 pb-10">
-                  <div className="space-y-2">
+                <form onSubmit={onSubmit} className="flex flex-col gap-4 pb-6">
+                  <div className="space-y-1.5">
                     <label
                       htmlFor="name"
                       className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
@@ -294,11 +295,11 @@ export function Opportunities() {
                       id="name"
                       name="name"
                       required
-                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
+                      className="h-12 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label
                       htmlFor="entity"
                       className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
@@ -311,11 +312,11 @@ export function Opportunities() {
                       id="entity"
                       name="entity"
                       required
-                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
+                      className="h-12 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label
                       htmlFor="email"
                       className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
@@ -327,22 +328,7 @@ export function Opportunities() {
                       name="email"
                       type="email"
                       required
-                      className="h-14 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500"
-                    >
-                      Additional Details (Optional)
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="flex w-full rounded-none border border-gray-300 bg-white px-3 py-3 text-sm text-black placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="h-12 rounded-none border-gray-300 bg-white text-black focus-visible:ring-black"
                     />
                   </div>
 
@@ -355,7 +341,7 @@ export function Opportunities() {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="h-14 w-full rounded-none text-xs font-black uppercase tracking-[0.2em] mt-6 bg-[#bd1026] text-white hover:bg-red-800 transition-colors"
+                    className="h-14 w-full rounded-none text-xs font-black uppercase tracking-[0.2em] mt-4 bg-[#bd1026] text-white hover:bg-red-800 transition-colors"
                   >
                     {isPending ? (
                       <>
@@ -369,7 +355,7 @@ export function Opportunities() {
                     )}
                   </Button>
 
-                  <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2">
+                  <p className="text-center text-[10px] text-gray-400 mt-2 uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2">
                     <ShieldAlert className="h-3.5 w-3.5" /> Secure Submission
                   </p>
                 </form>
