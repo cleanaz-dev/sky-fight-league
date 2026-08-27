@@ -71,17 +71,14 @@ export default function EventSection() {
         <EnhancedDigitalGrid />
 
         <div className="relative z-10 mx-auto max-w-[90rem] px-4 sm:px-6 xl:px-12">
-          
           {/* =========================================================
               TOP SECTION: TYPOGRAPHY & IMAGE
           ========================================================= */}
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:items-end lg:gap-8">
-            
             {/* LEFT: Typography */}
             <div className="flex-1">
               <Reveal y={20}>
                 <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-black/60">
-       
                   <span>{EVENT.title}</span>
                 </div>
               </Reveal>
@@ -89,9 +86,7 @@ export default function EventSection() {
               <Reveal delay={0.1} y={30}>
                 <h1 className="display mt-6 flex flex-col text-[4.5rem] leading-[0.85] tracking-tight sm:text-[7rem] md:text-[8rem] lg:text-[9rem]">
                   {/* Solid Text */}
-                  <span className="text-black">
-                    {EVENT.number}.
-                  </span>
+                  <span className="text-black">{EVENT.number}.</span>
                   {/* Outlined Text */}
                   <span className="text-transparent [-webkit-text-stroke:1.5px_black] sm:[-webkit-text-stroke:2px_black]">
                     TORONTO STARTS
@@ -104,7 +99,11 @@ export default function EventSection() {
             </div>
 
             {/* RIGHT: Square Poster/Image */}
-            <Reveal delay={0.3} x={30} className="w-full shrink-0 lg:max-w-xs xl:max-w-sm">
+            <Reveal
+              delay={0.3}
+              x={30}
+              className="w-full shrink-0 lg:max-w-xs xl:max-w-sm"
+            >
               <div className="bg-white p-2 shadow-xl ring-1 ring-black/5">
                 {/* Replace src with your actual square event graphic */}
                 <img
@@ -121,7 +120,6 @@ export default function EventSection() {
           ========================================================= */}
           <Reveal delay={0.4} y={40} className="mt-16 lg:mt-24">
             <div className="grid w-full grid-cols-1 shadow-2xl md:grid-cols-3">
-              
               {/* COLUMN 1: DATE (RED) */}
               <div className="relative flex flex-col items-center justify-center bg-primary p-12 text-center text-white sm:p-16">
                 <span className="text-[11px] font-bold uppercase tracking-[0.25em]">
@@ -148,9 +146,10 @@ export default function EventSection() {
                   <br />
                   Ontario
                 </h2>
-                
-                <a 
-                  href="#location" 
+                <a
+                  href="https://www.demo-room.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group mt-12 flex w-max items-center gap-3 border-b border-white/20 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors hover:border-white hover:text-white"
                 >
                   Explore The Venue
@@ -161,34 +160,36 @@ export default function EventSection() {
               {/* COLUMN 3: CARD REVEAL (DARK GREY) */}
               <div className="relative flex flex-col justify-center overflow-hidden bg-[#111] p-10 text-left text-white sm:p-16">
                 {/* Subtle diagonal lines background for the third column */}
-                <div 
+                <div
                   className="absolute inset-0 opacity-[0.03]"
                   style={{
-                    backgroundImage: "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
-                    backgroundSize: "8px 8px"
+                    backgroundImage:
+                      "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
+                    backgroundSize: "8px 8px",
                   }}
                 />
 
                 <div className="relative z-10">
-                  <Lock className="mb-10 h-6 w-6 text-primary" strokeWidth={2.5} />
-                  
+                  <Lock
+                    className="mb-10 h-6 w-6 text-primary"
+                    strokeWidth={2.5}
+                  />
+
                   <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">
                     Official Card Reveal
                   </span>
-                  
+
                   <h2 className="display mt-4 text-4xl uppercase leading-[0.9] sm:text-5xl">
                     September 17
                   </h2>
-                  
+
                   <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/40">
                     Released alongside the official SFL launch announcement.
                   </p>
                 </div>
               </div>
-
             </div>
           </Reveal>
-          
         </div>
       </section>
     </main>
