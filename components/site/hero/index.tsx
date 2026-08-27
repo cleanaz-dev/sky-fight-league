@@ -94,7 +94,7 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
             />
             <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-muted-foreground sm:text-xs">
               {EVENT.number} <span className="text-primary">/</span>{" "}
-              {isLocked ? "TO BE ANNOUNCED" : EVENT.title}
+              {isLocked ? "November 28th, 2026" : EVENT.title}
             </p>
             <motion.span
               className="hazard-stripes h-2 w-12 sm:w-16"

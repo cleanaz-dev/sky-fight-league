@@ -253,7 +253,7 @@ export default function AboutPage() {
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-3">
                 <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-white/50">
-                  Founder
+                  President
                 </h2>
               </div>
 
@@ -276,7 +276,7 @@ export default function AboutPage() {
                   League.
                 </p>
                 <p className="border-l-2 border-primary pl-6 font-semibold text-white">
-                  As founder, his vision is to create the kind of platform
+                  As president, his vision is to create the kind of platform
                   athletes can trust and audiences can believe in.
                 </p>
               </div>

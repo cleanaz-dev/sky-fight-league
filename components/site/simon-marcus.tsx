@@ -9,7 +9,7 @@ export function SimonMarcus() {
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[20vw] opacity-[0.02] display tracking-tighter text-white"
       >
-        FOUNDER
+        PRESIDENT
       </span>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
@@ -25,7 +25,7 @@ export function SimonMarcus() {
             <div className="relative aspect-[4/5] w-full overflow-hidden border border-border/50 bg-accent/30 shadow-2xl">
               <Image
                 src="/simon-portrait.png"
-                alt="Simon Marcus - Co-Founder"
+                alt="Simon Marcus - President"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
@@ -57,7 +57,7 @@ export function SimonMarcus() {
             {/* Red Co-Founder Box */}
             <div className="mb-8 bg-red-600 px-5 py-2.5 shadow-[0_0_20px_rgba(220,38,38,0.3)]">
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white sm:text-xs">
-                Co-Founder
+                PRESIDENT
               </span>
             </div>
 

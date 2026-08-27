@@ -84,7 +84,7 @@ export default function FoundersSection() {
               aria-hidden="true"
               className="whitespace-nowrap text-[20vw] opacity-[0.02] display tracking-tighter text-white"
             >
-              FOUNDER
+              PRESIDENT
             </span>
           </Reveal>
         </div>
@@ -101,7 +101,7 @@ export default function FoundersSection() {
                 <div className="relative aspect-[4/5] w-full overflow-hidden border border-border/50 bg-accent/30 shadow-2xl">
                   <Image
                     src="/simon-portrait.png"
-                    alt="Simon Marcus - Co-Founder"
+                    alt="Simon Marcus - PRESIDENT"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
@@ -133,7 +133,7 @@ export default function FoundersSection() {
               <Reveal delay={0.3} y={20}>
                 <div className="mb-8 bg-red-600 px-5 py-2.5 shadow-[0_0_20px_rgba(220,38,38,0.3)]">
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white sm:text-xs">
-                    Co-Founder
+                      PRESIDENT
                   </span>
                 </div>
               </Reveal>
@@ -157,7 +157,7 @@ export default function FoundersSection() {
               <Reveal delay={0.6} y={20}>
                 <div className="mt-10 max-w-md border-l-0 border-primary/30 pl-0 lg:border-l-2 lg:pl-6">
                   <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                    An eight-time Muay Thai World Champion and Canada’s most decorated Muay Thai athlete, Simon Marcus brings an elite championship pedigree and years of world-class competition to Sky Fight League. As Co-Founder of SFL, he is helping build a fighter-first platform defined by high standards, discipline, and greater opportunity for the next generation of combat athletes.
+                    An eight-time Muay Thai World Champion and Canada’s most decorated Muay Thai athlete, Simon Marcus brings an elite championship pedigree and years of world-class competition to Sky Fight League. As President of SFL, he is helping build a fighter-first platform defined by high standards, discipline, and greater opportunity for the next generation of combat athletes.
                   </p>
                 </div>
               </Reveal>
