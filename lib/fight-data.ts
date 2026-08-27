@@ -19,13 +19,12 @@ export const EVENT = {
   title: 'The Inaugural Event',
   date: 'Saturday, November 28, 2026',
   // First bout 6:30 PM Eastern. Drives the countdown timer.
-  scheduledAt: '2026-10-18T18:30:00-04:00',
+  scheduledAt: '2026-11-28T18:30:00-05:00',
   doors: 'Doors 5:00 PM \u2014 First Bout 6:30 PM',
   venue: 'DEMO ROOM',
   city: 'Toronto, Ontario',
   address: "307 Lake Shore Blvd E, M5A 1C1"
 }
-
 export const MAIN_EVENT: Bout = {
   weightClass: 'Lightweight Championship',
   isTitle: true,
