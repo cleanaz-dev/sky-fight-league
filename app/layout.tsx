@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata, Viewport } from 'next'
 import { Anton, Geist } from 'next/font/google'
 import './globals.css'
@@ -41,17 +42,27 @@ export const metadata: Metadata = {
     siteName: 'Sky Fight League',
     locale: 'en_CA',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sky Fight League',
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title,
     description,
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
     follow: true,
   },
 }
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
