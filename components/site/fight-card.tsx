@@ -3,7 +3,7 @@
 import { Crown, Ticket, Lock, Bell } from "lucide-react";
 import { motion } from "motion/react";
 
-import { FIGHT_CARD, EVENT, type Bout } from "@/lib/fight-data";
+import { FIGHT_CARD, EVENT, type Bout, formatRevealDate } from "@/lib/fight-data";
 
 import { Button } from "@/components/ui/button";
 import { Countdown } from "@/components/site/countdown";
@@ -180,7 +180,7 @@ function LockedCardNotice() {
       </h3>
 
       <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-primary sm:text-xs">
-        Full fight card revealing 09.17.26
+        Full fight card revealing {formatRevealDate(EVENT.cardRevealAt)}
       </p>
 
       {/* Atmospheric watermark */}
