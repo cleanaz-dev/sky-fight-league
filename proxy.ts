@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const TICKETS_HOSTS = new Set(["tickets.domain.com", "tickets.localhost"]);
+const TICKETS_HOSTS = new Set(["tickets.skyfightleague.ca", "tickets.localhost"]);
 
 export function proxy(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").split(":")[0];
