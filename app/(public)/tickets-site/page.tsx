@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 const SITE = "https://tickets.skyfightleague.ca";
 const TITLE = "Tickets | Sky Fight League";
 const DESCRIPTION = "Get your tickets now."; // change me
-const IMAGE = "/header-logo.png";
+const IMAGE = "/ticket-hero.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
