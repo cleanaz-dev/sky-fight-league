@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Redirector from "./redirector";
 
 export const dynamic = "force-dynamic";
 
@@ -34,12 +33,14 @@ export default function Page() {
   const target = process.env.TICKETS_TARGET_URL;
   if (!target) throw new Error("TICKETS_TARGET_URL is not set");
 
+  const script = `window.location.replace(${JSON.stringify(target).replace(/</g, "\\u003c")});`;
+
   return (
     <>
-      <Redirector to={target} />
-      <p>
-        Redirecting… <a href={target}>Continue to tickets</a>
-      </p>
+      <script dangerouslySetInnerHTML={{ __html: script }} />
+      <noscript>
+        <a href={target}>Continue to tickets</a>
+      </noscript>
     </>
   );
 }
