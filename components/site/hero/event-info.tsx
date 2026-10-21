@@ -9,11 +9,12 @@ interface EventInfoProps {
   date: string;
   venue: string;
   city: string;
+  ticketUrl: string;
 }
 
-export function EventInfo({ weightClass, date, venue, city }: EventInfoProps) {
+export function EventInfo({ weightClass, date, venue, city, ticketUrl }: EventInfoProps) {
   return (
-    <div className="relative z-10 pb-10">
+    <div className="relative z-10 pb-10"> 
       <HeroReveal y={18} delay={0.55}>
         <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-primary">
           {weightClass}
@@ -38,7 +39,7 @@ export function EventInfo({ weightClass, date, venue, city }: EventInfoProps) {
         <HeroReveal y={22} scale={0.96} delay={0.75}>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button
-              render={<a href="#fight-card" />}
+              render={<a href={ticketUrl} />}
               nativeButton={false}
               size="lg"
               className="rounded-none px-8 text-base font-bold uppercase tracking-widest"

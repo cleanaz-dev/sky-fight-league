@@ -17,7 +17,7 @@ import EventSection from "./site/event";
 import FoundersSection from "./site/founder-section";
 
 export function LandingPageWrapper() {
-  const isLocked = true;
+  const isLocked = false;
   const [earlyAccessOpen, setEarlyAccessOpen] = useState(false);
 
   return (

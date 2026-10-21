@@ -86,7 +86,7 @@ export function FightCard({ onOpenEarlyAccess }: FightCardProps) {
               </Button>
             ) : (
               <Button
-                render={<a href="#fight-card" />}
+                render={<a href="https://tickets.skyfightleague.ca" />}
                 nativeButton={false}
                 className="w-full rounded-none font-bold uppercase tracking-widest sm:w-auto"
               >
@@ -180,7 +180,7 @@ function LockedCardNotice() {
       </h3>
 
       <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-primary sm:text-xs">
-        Full fight card revealing {formatRevealDate(EVENT.cardRevealAt)}
+        Full fight card revealing {EVENT.cardRevealAt}
       </p>
 
       {/* Atmospheric watermark */}

@@ -66,7 +66,7 @@ export function SiteHeader({ isLocked, onOpenEarlyAccess }: SiteHeaderProps) {
             </Button>
           ) : (
             <Button
-              render={<a href="/#fight-card" />}
+              render={<a href="https://tickets.skyfightleague.ca" />}
               nativeButton={false}
               className="rounded-none font-bold uppercase tracking-widest"
             >
@@ -126,7 +126,7 @@ export function SiteHeader({ isLocked, onOpenEarlyAccess }: SiteHeaderProps) {
                 </Button>
               ) : (
                 <Button
-                  render={<a href="/#fight-card" />}
+                  render={<a href="https://tickets.skyfightleague.ca" />}
                   nativeButton={false}
                   className="w-full rounded-none font-bold uppercase tracking-widest"
                   onClick={() => setOpen(false)}

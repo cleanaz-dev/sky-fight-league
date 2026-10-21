@@ -25,8 +25,9 @@ export const EVENT = {
   venue: 'DEMO ROOM',
   city: 'Toronto, Ontario',
   address: "307 Lake Shore Blvd E, M5A 1C1",
-  cardReveal: 'Thursday, September 24, 2026',
+  cardReveal: 'TBD',
   cardRevealAt: fromZonedTime('2026-09-24 00:00:00', TIMEZONE).toISOString(),
+  ticketUrl: "https://tickets.skyfightleague.ca"
 }
 
 

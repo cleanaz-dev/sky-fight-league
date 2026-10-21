@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion"; // Note: changed from motion/react to standard framer-motion based on typical ecosystem
+import { motion } from "framer-motion";
 import { Calendar, MapPin, Bell } from "lucide-react";
 
 import { EVENT, formatRevealDate, MAIN_EVENT } from "@/lib/fight-data";
 
 import { HeroReveal } from "./hero-reveal";
-import { FighterColumn } from "./fighter-column";
-import { CenterVs } from "./center-vs";
 import { EventInfo } from "./event-info";
 import { Button } from "@/components/ui/button";
 
@@ -18,31 +16,55 @@ interface HeroProps {
 }
 
 export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
+  const bg = isLocked
+    ? {
+        mobile: "/cage-hero-mobile.png",
+        desktop: "/cage-hero-desktop.png",
+      }
+    : {
+        mobile: "/open-page-hero.png",
+        desktop: "/open-page-hero.png",
+      };
+
   return (
     <section
       id="top"
       className="relative min-h-screen overflow-hidden bg-accent pt-16"
     >
       {/* =========================================================
-          ATMOSPHERIC BACKGROUND
+          ATMOSPHERIC BACKGROUND (switches on isLocked)
       ========================================================= */}
       <div className="absolute inset-0 z-0">
-        {/* Mobile Background */}
         <Image
-          src="/cage-hero-mobile.png"
+          key={`bg-mobile-${isLocked}`}
+          src={bg.mobile}
           alt=""
           fill
           priority
           className="object-cover sm:hidden"
         />
-        {/* Desktop Background */}
         <Image
-          src="/cage-hero-desktop.png"
+          key={`bg-desktop-${isLocked}`}
+          src={bg.desktop}
           alt=""
           fill
           priority
           className="hidden object-cover sm:block"
         />
+
+        {/* Unlocked only: full-width darkening + red glow (no box edges) */}
+        {!isLocked && (
+          <>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_62%,rgba(220,38,38,0.35)_0%,rgba(220,38,38,0.12)_35%,transparent_65%)]"
+            />
+          </>
+        )}
       </div>
 
       {/* =========================================================
@@ -115,36 +137,27 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
             {/* SQUARE REVEAL DATE BOX */}
             <HeroReveal y={20} delay={0.15}>
               <div className="relative mx-auto mb-6 hidden h-48 w-48 flex-col items-center sm:mb-8 sm:flex sm:size-72">
-                {/* Darkened Background Image */}
                 <div
                   className="absolute inset-0 bg-[url('/lock.png')] bg-contain bg-center bg-no-repeat opacity-40 mix-blend-luminosity transition-opacity duration-300 hover:opacity-50"
                   aria-hidden="true"
                 />
 
-                {/* Text Content overlay */}
                 <div className="absolute inset-x-0 top-[62%] z-10 flex -translate-y-1/2 flex-col items-center justify-center px-4">
-                  {/* 1. AGGRESSIVE SUBTITLE: Bright red, black weight, italic, extra wide tracking */}
                   <span className="mb-0.5 text-center text-[10px] font-black uppercase italic tracking-[0.4em] text-red-600 drop-shadow-md sm:text-xs">
                     Card Reveal
                   </span>
 
-                  {/* 2. AGGRESSIVE DATE: Larger, italic, stark white with a harsh red glow/shadow */}
                   <span className="text-xl font-black italic tracking-widest text-white drop-shadow-[0_0_15px_rgba(220,38,38,0.8)] sm:text-3xl">
-                    {formatRevealDate(EVENT.cardRevealAt)}
+                    {EVENT.cardReveal}
                   </span>
                 </div>
               </div>
             </HeroReveal>
+
             {/* MAIN HEADLINE */}
             <HeroReveal y={20} delay={0.25}>
               <h1 className="display flex flex-col items-center text-center text-5xl leading-[0.85] tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
                 <span className="text-white">THE CARD</span>
-                {/* 
-                    Note: If you run into the same overlapping internal lines issue with the hollow text here, 
-                    change text-transparent and [-webkit-text-stroke] to:
-                    text-black [text-shadow:-1px_-1px_0_white,1px_-1px_0_white,-1px_1px_0_white,1px_1px_0_white]
-                    sm:[text-shadow:-2px_-2px_0_white,2px_-2px_0_white,-2px_2px_0_white,2px_2px_0_white] 
-                */}
                 <span className="mt-2 text-black [-webkit-text-stroke:1px_white] sm:mt-3 sm:[-webkit-text-stroke:2px_white]">
                   UNLOCKS SOON
                 </span>
@@ -189,46 +202,29 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
           </div>
         ) : (
           /* =======================================================
-             UNLOCKED STATE VIEW (STAREDOWN)
+             UNLOCKED STATE VIEW (FIGHTERS)
           ======================================================= */
           <>
-            <div className="relative grid flex-1 grid-cols-2 items-center gap-0 pt-6 md:pt-2">
+            <div className="relative min-h-[340px] flex-1 sm:min-h-[480px] md:min-h-[560px]">
               <HeroReveal
-                x={-45}
-                y={15}
-                scale={0.96}
-                delay={0.15}
-                duration={0.9}
-                className="relative z-10"
+                y={30}
+                scale={0.97}
+                delay={0.2}
+                duration={1}
+                className="absolute inset-0"
               >
-                <FighterColumn
-                  image="/fighter-red.png"
-                  video="/fighter-white-loop.mp4"
-                  name={MAIN_EVENT.red.name}
-                  nickname={MAIN_EVENT.red.nickname}
-                  record={MAIN_EVENT.red.record}
-                  side="red"
-                />
-              </HeroReveal>
-
-              <CenterVs rounds={MAIN_EVENT.rounds} />
-
-              <HeroReveal
-                x={45}
-                y={15}
-                scale={0.96}
-                delay={0.25}
-                duration={0.9}
-                className="relative z-10"
-              >
-                <FighterColumn
-                  image="/fighter-white.png"
-                  video="/fighter-red-loop.mp4"
-                  name={MAIN_EVENT.white.name}
-                  nickname={MAIN_EVENT.white.nickname}
-                  record={MAIN_EVENT.white.record}
-                  side="white"
-                />
+                {/* Mobile: 125% wide (smaller than before), centered.
+                    Desktop: full width. No mask, no opacity. */}
+                <div className="absolute bottom-0 left-1/2 h-full w-[125%] -translate-x-1/2 sm:w-full">
+                  <Image
+                    src="/unlocked-figthers.png"
+                    alt="Main card fighters"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 125vw, 1152px"
+                    className="object-contain object-bottom"
+                  />
+                </div>
               </HeroReveal>
             </div>
 
@@ -237,6 +233,7 @@ export function Hero({ isLocked = true, onOpenEarlyAccess }: HeroProps) {
               date={EVENT.date}
               venue={EVENT.venue}
               city={EVENT.city}
+              ticketUrl={EVENT.ticketUrl}
             />
           </>
         )}

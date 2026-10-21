@@ -181,7 +181,7 @@ export default function EventSection() {
                   </span>
 
                   <h2 className="display mt-4 text-4xl uppercase leading-[0.9] sm:text-5xl">
-                    {formatRevealDateLong(EVENT.cardRevealAt)}
+                    {EVENT.cardReveal}
                   </h2>
 
                   <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/40">
