@@ -50,7 +50,7 @@ export type Bout = {
 
 
 export const MAIN_EVENT: Bout = {
-  weightClass: 'Lightweight Championship',
+  weightClass: 'MUAY THAI || KICKBOXING || MMA',
   isTitle: true,
   rounds: 5,
   red: {
